@@ -27,8 +27,8 @@ struct ContentView: View {
                 .foregroundStyle(
                     LinearGradient(
                         colors: [
-                            .red.opacity(0.8),
-                            .white
+                            .blue.opacity(0.8),
+                            .red
                         ],
                         startPoint: .leading,
                         endPoint: .trailing
