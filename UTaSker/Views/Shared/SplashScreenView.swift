@@ -10,12 +10,13 @@ import SwiftUI
 
 
 struct SplashScreenView: View {
+    var onFinished: () -> Void
     @State private var isActive = false
+    let transition: ContentTransition = .identity
+    @State private var playTransition: Bool = false
 
     var body: some View {
-        if isActive {
-            HomeView()
-        } else {
+      
             
             ZStack {
                 // Gradient background
@@ -33,41 +34,64 @@ struct SplashScreenView: View {
           
                 
                 VStack {
-//                    Image("Logo")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 200, height: 200)
+                    //                    Image("Logo")
+                    //                        .resizable()
+                    //                        .scaledToFit()
+                    //                        .frame(width: 200, height: 200)
                     
-                    Text("UTASKER")
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [
-                                    .blue.opacity(0.8),
-                                    .red
-                                ],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
+                    HStack(spacing: 0) {
+                        Text("UT")
+                            .foregroundColor(.primaryRed)
+                        Text("A")
+                            .foregroundColor(.primaryBlue)
+                        Text("S")
+                            .foregroundColor(.primaryRed)
+                        Text("KER")
+                            .foregroundColor(.primaryBlue)
+                    }
+                    .font(
+                        .system(size: playTransition ? 48 : 16, weight: .bold)
+                    )
+                    .scaleEffect(playTransition ? 1.0 : 0.6)
+                    .opacity(playTransition ? 1 : 0)
+                    .animation(.easeInOut(duration: 2), value: playTransition)
                     
-                    Text("Earn. Connect. Thrive.")
-                        .font(.subheadline)
-                        .foregroundColor(.white)
+                    HStack(spacing: 8) {
+                        Text("Earn.")
+                            .foregroundColor(.primaryBlue)
+                            .opacity(playTransition ? 1 : 0)
+                            .offset(y: playTransition ? 0 : 10)
+                            .animation(.easeOut(duration: 0.8).delay(0.6), value: playTransition)
+
+                        Text("Connect.")
+                            .fontWeight(.bold)
+                            .opacity(playTransition ? 1 : 0)
+                            .offset(y: playTransition ? 0 : 10)
+                            .animation(.easeOut(duration: 0.8).delay(0.8), value: playTransition)
+
+                        Text("Thrive.")
+                            .foregroundColor(.primaryRed)
+                            .opacity(playTransition ? 1 : 0)
+                            .offset(y: playTransition ? 0 : 10)
+                            .animation(.easeOut(duration: 0.8).delay(1.0), value: playTransition)
+                    }
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+
                 }
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 42.0) {
+                    playTransition = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
                         withAnimation {
-                            isActive = true
+                            onFinished()
                         }
                     }
-                }
-            }
+                }            
         }
     }
 }
 
 
 #Preview {
-    SplashScreenView()
+    SplashScreenView{}
 }
