@@ -9,9 +9,28 @@ import SwiftUI
 
 struct SearchView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color(.primaryLight).ignoresSafeArea()
+
+            VStack(alignment: .leading, spacing: 16) {
+                FiltersView()
+
+                ScrollView {
+                    VStack(spacing: 16) {
+                        ForEach(SampleTasks.all) { task in
+                            TaskCardView(task: task)
+                                .padding(.horizontal)
+                        }
+                    }
+                
+                }
+
+           
+            }
+        }
     }
 }
+
 
 #Preview {
     SearchView()
