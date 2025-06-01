@@ -39,7 +39,7 @@ struct TaskCardView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(task.title)
-                        .font(.body)
+                        .font(.subheadline)
                         .foregroundColor(.textColor1)
                         .fontWeight(.medium)
 
