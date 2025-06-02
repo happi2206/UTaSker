@@ -10,8 +10,8 @@
 import Foundation
 
 struct SampleTasks {
-    static let all: [Task] = [
-        Task(
+    static let all: [TaskModel] = [
+        TaskModel(
             date: "Fri 31 May",
             time: "2 PM",
             title: "Help set up chairs",
@@ -22,7 +22,7 @@ struct SampleTasks {
             price: "$5",
             images: ["Home1"]
         ),
-        Task(
+        TaskModel(
             date: "Fri 31 May",
             time: "3 PM",
             title: "Library book sorting",
@@ -33,7 +33,7 @@ struct SampleTasks {
             price: "Free",
             images: ["Home2"]
         ),
-        Task(
+        TaskModel(
             date: "Fri 31 May",
             time: "5 PM",
             title: "Photography for event",
@@ -44,7 +44,7 @@ struct SampleTasks {
             price: "$15",
             images: ["Home3"]
         ),
-        Task(
+        TaskModel(
             date: "Sat 1 Jun",
             time: "10 AM",
             title: "Tech booth setup",
@@ -55,7 +55,7 @@ struct SampleTasks {
             price: "$20",
             images: ["Home1"]
         ),
-        Task(
+        TaskModel(
             date: "Sat 1 Jun",
             time: "11:30 AM",
             title: "Bake Sale Help",
@@ -66,7 +66,7 @@ struct SampleTasks {
             price: "$10",
             images: ["Home2"]
         ),
-        Task(
+        TaskModel(
             date: "Sat 1 Jun",
             time: "1 PM",
             title: "Language partner session",
@@ -77,7 +77,7 @@ struct SampleTasks {
             price: "$5",
             images: ["Home3"]
         ),
-        Task(
+        TaskModel(
             date: "Sun 2 Jun",
             time: "12 PM",
             title: "Help clean up after club meeting",
@@ -88,7 +88,7 @@ struct SampleTasks {
             price: "Free",
             images: ["Home2"]
         ),
-        Task(
+        TaskModel(
             date: "Sun 2 Jun",
             time: "3 PM",
             title: "Dog walking for professor",
@@ -99,7 +99,7 @@ struct SampleTasks {
             price: "$8",
             images: ["Home2"]
         ),
-        Task(
+        TaskModel(
             date: "Mon 3 Jun",
             time: "9 AM",
             title: "Assist during open day",

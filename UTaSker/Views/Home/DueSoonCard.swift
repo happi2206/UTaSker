@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct DueSoonTaskCard: View {
-    let task: Task
+    let task: TaskModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Task: Identifiable {
+struct TaskModel: Identifiable {
     let id = UUID()
     let date: String
     let time: String

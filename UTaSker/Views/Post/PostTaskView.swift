@@ -8,8 +8,35 @@
 import SwiftUI
 
 struct PostTaskView: View {
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                HStack {
+                    Text("Post a task")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
+                    Spacer()
+
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "x.circle.fill")
+                            .foregroundColor(.gray)
+                            .font(.title3)
+                    }
+                }
+                .padding(.top, 30)
+                .padding(.horizontal)
+
+                TaskFormView()
+            }
+
+            .padding(.bottom, 40)
+        }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 
