@@ -11,7 +11,7 @@ struct MyTaskView: View {
     @State private var selectedTab = 0
     @State private var selectedFilter = "Pending"
     
-    let filters = ["All", "Pending", "Ongoing", "Needs Review", "Completed"]
+    let filters = ["All", "Pending", "Ongoing", "Awaiting Review", "Completed", "Cancelled"]
     
     var body: some View {
         NavigationView {
@@ -68,7 +68,7 @@ struct MyTaskView: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             ForEach(filteredTasks) { task in
-                                TaskCardView(task: task)
+                                MyTaskCardView(task: task)
                                     .padding(.horizontal)
                             }
                         }
@@ -80,14 +80,19 @@ struct MyTaskView: View {
     }
     
     var filteredTasks: [Task] {
+        // First filter by Posted/Applied (isMyTask)
+        let baseTasks = selectedTab == 0
+            ? SampleTasks.all.filter { $0.isMyTask } // Posted tasks (isMyTask = true)
+            : SampleTasks.all.filter { !$0.isMyTask } // Applied tasks (isMyTask = false)
+        
+        // Then filter by status
         if selectedFilter == "All" {
-            return SampleTasks.all
+            return baseTasks
         } else {
-            // In a real app, we would filter based on actual task status
-            // For now, just showing sample tasks
-            return Array(SampleTasks.all.prefix(2))
+            return baseTasks.filter { $0.status.lowercased() == selectedFilter.lowercased() }
         }
     }
+
 }
 
 #Preview {

@@ -8,6 +8,8 @@
 import SwiftUI
 
 enum TaskStatus: String {
+    case open = "Open"
+    case assigned = "Assigned"
     case pending = "Pending"
     case current = "Current"
     case completed = "Completed"
@@ -15,6 +17,10 @@ enum TaskStatus: String {
     
     var color: Color {
         switch self {
+        case .open:
+            return Color.yellow
+        case .assigned:
+            return Color.blue
         case .pending:
             return Color.orange
         case .current:
@@ -27,7 +33,7 @@ enum TaskStatus: String {
     }
 }
 
-struct AppliedStatusBadge: View {
+struct StatusBadge: View {
     var status: TaskStatus
 
     var body: some View {
@@ -43,6 +49,6 @@ struct AppliedStatusBadge: View {
 }
 
 #Preview {
-    AppliedStatusBadge(status: .current)
+    StatusBadge(status: .current)
     
 }

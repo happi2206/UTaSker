@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TaskCardView: View {
+struct MyTaskCardView: View {
     let task: Task
 
     var body: some View {
@@ -48,10 +48,11 @@ struct TaskCardView: View {
                         .foregroundColor(.textColor2)
                 }
             }.padding(.top, 3)
-
-            Text(task.status)
-                .font(.subheadline)
-                .foregroundColor(.textColor2)
+            HStack{
+                StatusText(isMyTask: task.isMyTask, status: task.status, numberOfOffers: 3)
+                
+            }
+            
         }
         .padding()
         .background(Color.white)
@@ -61,7 +62,7 @@ struct TaskCardView: View {
 }
 
 #Preview {
-    TaskCardView(task: Task(
+    MyTaskCardView(task: Task(
         date: "Thu 29 May",
         time: "10 AM",
         title: "Laptop Setup",
@@ -70,7 +71,8 @@ struct TaskCardView: View {
         description: "Need help setting up a new laptop",
         iconName: "laptopcomputer",
         price: "$30",
-        status: "Pending",
-        isMyTask: false
+        status: "pending",
+        isMyTask: true
+        
     ))
 }

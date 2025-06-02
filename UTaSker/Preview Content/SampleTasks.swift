@@ -20,7 +20,10 @@ struct SampleTasks {
             description: "Assist in setting up chairs for the event in Hall B.",
             iconName: "chair.lounge.fill",
             price: "$5",
+            status: "Pending",
+            isMyTask: true ,
             images: ["Home1"]
+          
         ),
         Task(
             date: "Fri 31 May",
@@ -31,6 +34,8 @@ struct SampleTasks {
             description: "Organize books back onto the shelves in alphabetical order.",
             iconName: "books.vertical",
             price: "Free",
+            status: "Ongoing",
+            isMyTask: true ,
             images: ["Home2"]
         ),
         Task(
@@ -42,6 +47,8 @@ struct SampleTasks {
             description: "Take photos for the marketing club’s workshop.",
             iconName: "camera.fill",
             price: "$15",
+            status: "Awaiting Review",
+            isMyTask: true ,
             images: ["Home3"]
         ),
         Task(
@@ -53,6 +60,8 @@ struct SampleTasks {
             description: "Help with setting up tech booth cables and monitors.",
             iconName: "desktopcomputer",
             price: "$20",
+            status: "Pending",
+            isMyTask: false ,
             images: ["Home1"]
         ),
         Task(
@@ -64,6 +73,8 @@ struct SampleTasks {
             description: "Assist with selling cupcakes and managing payments.",
             iconName: "cupcake",
             price: "$10",
+            status: "Completed",
+            isMyTask: false ,
             images: ["Home2"]
         ),
         Task(
@@ -75,6 +86,8 @@ struct SampleTasks {
             description: "Practice speaking English with an international student.",
             iconName: "person.2.fill",
             price: "$5",
+            status: "Completed",
+            isMyTask: false ,
             images: ["Home3"]
         ),
         Task(
@@ -86,6 +99,8 @@ struct SampleTasks {
             description: "Dispose of trash, wipe tables, and restore chairs.",
             iconName: "trash.fill",
             price: "Free",
+            status: "Cancelled",
+            isMyTask: true ,
             images: ["Home2"]
         ),
         Task(
@@ -97,6 +112,8 @@ struct SampleTasks {
             description: "Walk a friendly golden retriever for 30 mins.",
             iconName: "pawprint.fill",
             price: "$8",
+            status: "Completed",
+            isMyTask: false ,
             images: ["Home2"]
         ),
         Task(
@@ -108,6 +125,8 @@ struct SampleTasks {
             description: "Guide new students and distribute flyers.",
             iconName: "megaphone.fill",
             price: "$12",
+            status: "Ongoing",
+            isMyTask: false ,
             images: ["Home2"]
         )
     ]

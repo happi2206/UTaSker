@@ -18,6 +18,8 @@ struct Task: Identifiable {
     let iconName: String
     let price: String
     let images: [String]?
+    let status: String
+    let isMyTask: Bool
 
    
     init(
@@ -29,7 +31,9 @@ struct Task: Identifiable {
         description: String,
         iconName: String,
         price: String,
-        images: [String]? = nil 
+        status: String,
+        isMyTask: Bool,
+        images: [String]? = nil
     ) {
         self.date = date
         self.time = time
@@ -40,5 +44,7 @@ struct Task: Identifiable {
         self.iconName = iconName
         self.price = price
         self.images = images
+        self.status = status
+        self.isMyTask = isMyTask
     }
 }
