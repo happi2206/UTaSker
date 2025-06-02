@@ -33,7 +33,9 @@ struct MainTabView: View {
                 }
                 .tag(2)
 
-            SearchView()
+
+                
+            MyTaskView()
                 .tabItem {
                     Image(systemName: "tray.full")
                     Text("Tasks")
@@ -64,3 +66,4 @@ struct MainTabView: View {
         .toolbarBackground(.visible, for: .tabBar)
     }
 }
+

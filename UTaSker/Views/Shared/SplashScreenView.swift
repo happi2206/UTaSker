@@ -41,13 +41,13 @@ struct SplashScreenView: View {
                     
                     HStack(spacing: 0) {
                         Text("UT")
-                            .foregroundColor(.primaryRed)
+                            .foregroundColor(.primaryBlue)
                         Text("A")
-                            .foregroundColor(.primaryBlue)
+                            .foregroundColor(.white)
                         Text("S")
-                            .foregroundColor(.primaryRed)
-                        Text("KER")
                             .foregroundColor(.primaryBlue)
+                        Text("KER")
+                            .foregroundColor(.white)
                     }
                     .font(
                         .system(size: playTransition ? 48 : 16, weight: .bold)
@@ -75,7 +75,7 @@ struct SplashScreenView: View {
                             .offset(y: playTransition ? 0 : 10)
                             .animation(.easeOut(duration: 0.8).delay(1.0), value: playTransition)
                     }
-                    .font(.subheadline)
+                    .font(.headline)
                     .foregroundColor(.white)
 
                 }
