@@ -175,5 +175,7 @@ struct TaskDetailView: View {
         distance: "150m",
         description: "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up?",
         iconName: "laptopcomputer",
-        price: "$30"))
+        price: "$30",
+        status: "Completed",
+        isMyTask: true))
 }
