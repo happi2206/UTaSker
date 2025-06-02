@@ -30,7 +30,7 @@ struct MainTabView: View {
                     Text("Post")
                 }
                 
-            SearchView()
+            MyTaskView()
                 .tabItem {
                     Image(systemName: "tray.full")
                     Text("Tasks")
@@ -49,3 +49,4 @@ struct MainTabView: View {
         
     }
 }
+
