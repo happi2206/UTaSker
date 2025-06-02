@@ -39,7 +39,7 @@ struct TaskCardView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(task.title)
-                        .font(.subheadline )
+                        .font(.subheadline)
                         .foregroundColor(.textColor1)
                         .fontWeight(.medium)
 
@@ -49,9 +49,11 @@ struct TaskCardView: View {
                 }
             }.padding(.top, 3)
 
-            Text(task.status)
-                .font(.subheadline)
-                .foregroundColor(.textColor2)
+            VStack (alignment: .leading) {
+                Text(task.description)
+                    .font(.subheadline)
+                    .foregroundColor(.textColor2)
+            }
         }
         .padding()
         .background(Color.white)
@@ -67,10 +69,10 @@ struct TaskCardView: View {
         title: "Laptop Setup",
         building: "Building 11",
         distance: "150m",
-        description: "Need help setting up a new laptop",
+        description: "Need help setting up a new laptop Need help setting up a new laptop Need help setting up a new laptop",
         iconName: "laptopcomputer",
         price: "$30",
-        status: "Pending",
+        status: "Completed",
         isMyTask: false
     ))
 }
