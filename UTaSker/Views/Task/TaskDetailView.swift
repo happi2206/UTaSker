@@ -24,6 +24,9 @@ struct TaskDetailView: View {
                     .foregroundColor(.textColor1)
                     .offset(x: -10)
                 Spacer()
+                if(task.isMyTask){
+                    Image(systemName: "square.and.pencil")
+                }
             }
             
             VStack(alignment: .leading) {
@@ -157,10 +160,17 @@ struct TaskDetailView: View {
             }
             
             Spacer()
-            
-            PrimaryButton(title: "Send a Request") {
-                print("wahoo")
+            if(task.isMyTask){
+                PrimaryButton(title: "View Offers") {
+                    print("yayyy")
+                }
             }
+            else{
+                PrimaryButton(title: "Send a Request") {
+                    print("wahoo")
+                }
+            }
+            
         }
         .padding()
     }
