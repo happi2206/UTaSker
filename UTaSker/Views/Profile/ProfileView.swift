@@ -72,15 +72,10 @@ struct ProfileView: View {
                     textColor: .textColor1,
                  
                 )
-                .padding()
-                CustomTabView()
-
-                VStack(alignment: .leading, spacing: 24) {
-                    ReviewRow(name: "Mihinn Jones", role: "UTS Staff member", comment: "Great work! Very friendly, quick to respond, and fixed my tech issue in no time. Highly recommend!")
-                    ReviewRow(name: "David Lee", role: "UTS Staff member", comment: "Nice girl, super determined and helpful!")
-                }
                 .padding(.horizontal)
-                .padding(.bottom, 40)
+                .padding(.top)
+                CustomTabView()
+                
             }
             .padding(.top)
         }
