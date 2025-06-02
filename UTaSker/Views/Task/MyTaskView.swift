@@ -11,7 +11,7 @@ struct MyTaskView: View {
     @State private var selectedTab = 0
     @State private var selectedFilter = "Pending"
     
-    let filters = ["All", "Pending", "Ongoing", "Needs Review"]
+    let filters = ["All", "Pending", "Ongoing", "Needs Review", "Completed"]
     
     var body: some View {
         NavigationView {
