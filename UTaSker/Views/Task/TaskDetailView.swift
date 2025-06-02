@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskDetailView: View {
-    let task: Task
+    let task: TaskModel
     
     var body: some View {
         VStack {
@@ -177,7 +177,7 @@ struct TaskDetailView: View {
 }
 
 #Preview {
-    TaskDetailView(task: Task(
+    TaskDetailView(task: TaskModel(
         date: "Thu 29 May",
         time: "10 AM",
         title: "Laptop Setup",

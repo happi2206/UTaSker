@@ -79,7 +79,7 @@ struct MyTaskView: View {
         }
     }
     
-    var filteredTasks: [Task] {
+    var filteredTasks: [TaskModel] {
         // First filter by Posted/Applied (isMyTask)
         let baseTasks = selectedTab == 0
             ? SampleTasks.all.filter { $0.isMyTask } // Posted tasks (isMyTask = true)

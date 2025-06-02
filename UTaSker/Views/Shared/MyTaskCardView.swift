@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MyTaskCardView: View {
-    let task: Task
+    let task: TaskModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -62,7 +62,7 @@ struct MyTaskCardView: View {
 }
 
 #Preview {
-    MyTaskCardView(task: Task(
+    MyTaskCardView(task: TaskModel(
         date: "Thu 29 May",
         time: "10 AM",
         title: "Laptop Setup",
