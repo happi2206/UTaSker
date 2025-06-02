@@ -16,13 +16,13 @@ struct CustomTabView: View {
                 Text("Bio").tag(1)
                 Text("Reviews").tag(2)
             })
-            .pickerStyle(SegmentedPickerStyle())
+            .pickerStyle(.segmented)
             
             if (selectedTab == 1) {
                 Text("This is my bio! I can write stuff about myself or what I'm good at 😎. I can't think of any 🤔 so I'm just going to keep talking until I run out of things to say 😁.")
             }
             else if (selectedTab == 2) {
-                ReviewRow(name: "Sigmund Freud", role: "Staff", comment: "Wonderful help, I actually got to roll in my grave.")
+                ReviewRow(name: "Sigmund Freud", role: "Staff", comment: "Wonderful help, I'm rolling in my grave.")
                 ReviewRow(name: "Sebastian Groundstroem", role: "Staff", comment: "Part of the best Apple Foundation Cohort I have ever taught.")
                 ReviewRow(name: "Friendly Grey Cat", role: "Student", comment: "Meow.")
                 
