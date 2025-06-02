@@ -8,91 +8,172 @@
 import SwiftUI
 
 struct TaskDetailView: View {
+    let task: Task
+    
     var body: some View {
         VStack {
-            
             HStack {
+                //Button {
                 Image(systemName: "arrow.left")
+                
+                Spacer()
+                
                 Text("Task Details")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(.textColor1)
+                    .offset(x: -10)
+                Spacer()
             }
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Task")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.textColor1)
+                    .padding(.bottom, 15)
                 HStack {
                     Image(systemName: "truck.box")
-                    VStack {
-                        Text("Moving Help Needed!")
-                        Text("Help me move my furniture into my student accommodation.")
+                        .resizable()
+                        .aspectRatio(1.0, contentMode: .fill)
+                        .frame(width: 14, height: 14)
+                        .padding()
+                        .foregroundColor(.primary)
+                        .background(Color.lightBlue)
+                        .cornerRadius(10)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Laptop Setup")
+                            .font(.subheadline)
+                            .foregroundColor(.textColor1)
+                            .fontWeight(.medium)
+                        Text("Need help with setting up a laptop.") //task.description.components(separatedBy: ".")[0] + "."
+                            .font(.footnote)
+                            .foregroundColor(.textColor2)
                     }
+                    Spacer()
                 }
             }
+            .padding(.vertical)
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Poster")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.textColor1)
+                    .padding(.bottom, 10)
                 HStack {
                     Image("MalePlaceholder")
                         .resizable()
+                        .frame(maxWidth: 50, maxHeight: 50)
                         .scaledToFit()
-                    VStack {
+                    
+                    VStack(alignment: .leading) {
                         Text("Ethan Harper")
+                            .font(.subheadline)
+                            .foregroundColor(.textColor1)
+                            .fontWeight(.medium)
                         Text("Student")
+                            .font(.footnote)
+                            .foregroundColor(.textColor2)
                         Text("ethan.harper@student.uts.edu.au")
+                            .font(.footnote)
+                            .foregroundColor(.textColor2)
                     }
+                    //.frame(maxWidth: .infinity)
+                    //.padding()
+                    Spacer()
                 }
             }
+            .padding(.vertical)
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Description")
-                Text("I need help moving my furniture into my student accommodation. It's a small apartment, so it shouldn't take too long. The furniture is already in the lobby. I'm willing to pay $50 for the help.")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.textColor1)
+                    .padding(.bottom, 10)
+                HStack {
+                    Text("Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up?") //task.description
+                        .font(.footnote)
+                        .foregroundColor(.textColor2)
+                        .lineSpacing(CGFloat(7))
+                    Spacer()
+                }
             }
+            .padding(.bottom, 25)
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Details")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.textColor1)
+                    .padding(.bottom, 15)
                 
                 HStack {
                     Image(systemName: "calendar")
-                    Text("May 29, 2025 · 10 AM")
+                    Text("Thu 11, May · 3 PM") //"\(task.date) · \(task.time)"
                         .fontWeight(.medium)
                 }
                 
+                Divider()
+                    .padding(.vertical, 5)
+                
                 HStack {
                     Image(systemName: "creditcard")
-                    Text("$50")
+                    Text("$30") //task.price
                 }
                 
-                VStack{
+                Divider()
+                    .padding(.vertical, 5)
+                
+                VStack(alignment: .leading) {
                     Text("Location")
+                        .font(.footnote)
+                        .foregroundColor(.textColor2)
                     Text("Building 11, Level 3, Room 300 (CB11.03.300)")
                 }
                 
                 HStack {
-                    VStack {
+                    VStack(alignment: .leading) {
+                        Divider()
+                            .padding(.vertical, 5)
                         Text("Category")
+                            .font(.footnote)
+                            .foregroundColor(.textColor2)
                         Text("Labour")
                     }
                     
-                    VStack {
+                    VStack(alignment: .leading) {
+                        Divider()
+                            .padding(.vertical, 5)
                         Text("Requirements")
+                            .font(.footnote)
+                            .foregroundColor(.textColor2)
                         Text("Strong, good grip")
                     }
                 }
                 
             }
             
-            Button("Send a Request") {
+            Spacer()
+            
+            PrimaryButton(title: "Send a Request") {
                 print("wahoo")
             }
-            .font(.title3)
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .padding()
         }
+        .padding()
     }
 }
 
 #Preview {
-    TaskDetailView()
+    TaskDetailView(task: Task(
+        date: "Thu 29 May",
+        time: "10 AM",
+        title: "Laptop Setup",
+        building: "Building 11",
+        distance: "150m",
+        description: "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up?",
+        iconName: "laptopcomputer",
+        price: "$30"))
 }
