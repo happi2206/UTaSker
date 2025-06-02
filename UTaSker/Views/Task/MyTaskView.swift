@@ -29,8 +29,10 @@ struct MyTaskView: View {
                         
                         Image(systemName: "bell.badge")
                             .symbolRenderingMode(.multicolor)
+                            .symbolVariant(.none)
                             .fontWeight(.regular)
                             .foregroundColor(.primaryBlue)
+                            .symbolEffect(.wiggle)
                     }
                     .padding(.horizontal)
                     
