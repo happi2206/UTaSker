@@ -167,46 +167,39 @@ struct TaskDetailView: View {
                 }
                 
                 Spacer()
-                if(task.isMyTask && task.status == "Open"){
-                    
-                    //isOffersSheetShowing
-                
-                    PrimaryButton(
-                        title: "View Offers",
-                        action: { isOffersSheetShowing = true},
-                        backgroundColor: .primaryBlue ,
-                        textColor: .white,
-                     
-                    )
-                    
-                   
-                   
+                if task.isMyTask {
+                    if task.status == "Open" {
+                        PrimaryButton(
+                            title: "View Offers",
+                            action: { isOffersSheetShowing = true },
+                            backgroundColor: .primaryBlue,
+                            textColor: .white
+                        )
+                    } else {
+                        PrimaryButton(
+                            title: task.status,
+                            action: { print("hey") },
+                            backgroundColor: .primaryDark,
+                            textColor: .white
+                        )
+                    }
+                } else {
+                    if task.status == "Open" {
+                        NavigationLink(destination: TaskDetailView(task: task)) {
+                            PrimaryButton(title: "Send a Request") {
+                                print("wahoo")
+                            }
+                        }
+                    } else {
+                        PrimaryButton(
+                            title: task.status,
+                            action: { print("hey") },
+                            backgroundColor: .primaryDark,
+                            textColor: .white
+                        )
+                    }
                 }
-                else if(task.isMyTask && task.status != "Open"){
 
-                    PrimaryButton(
-                        title: task.status,
-                        action: { print("hey")},
-                        backgroundColor: .primaryDark ,
-                        textColor: .white,
-                     
-                    )
-                }
-                else if(!task.isMyTask && task.status == "Open"){
-                    NavigationLink(destination: TaskDetailView(task: task)) {
-                        PrimaryButton(title: "Send a Request") {
-                            print("wahoo")
-                        }}
-                }
-                else{
-                    PrimaryButton(
-                        title: task.status,
-                        action: { print("hey")},
-                        backgroundColor: .primaryDark ,
-                        textColor: .white
-                     
-                    )
-                }
                 
             }
             .padding()
@@ -220,6 +213,8 @@ struct TaskDetailView: View {
 
     }
 }
+
+
 
 #Preview {
     TaskDetailView(task: TaskModel(

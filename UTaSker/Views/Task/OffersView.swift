@@ -71,59 +71,67 @@ struct OffersView: View {
         @Binding var isShowingConfirmationScreen: Bool
         
         var body: some View {
-            HStack(alignment: .center, spacing: 12) {
+            
+             VStack(alignment: .leading){
                 Image(imageName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 55, height: 55)
                     .clipShape(Circle())
-                
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(name)
-                        .font(.system(size: 16, weight: .semibold))
+                HStack(alignment: .center, spacing: 12) {
                     
-                    Text(role)
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
                     
-                    HStack(spacing: 2) {
-                        ForEach(0..<5, id: \.self) { _ in
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
-                                .font(.system(size: 12))
-                        }
-                        Text("(\(reviews))")
-                            .font(.footnote)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(name)
+                            .font(.system(size: 16, weight: .semibold))
+                        
+                        Text(role)
+                            .font(.system(size: 14))
                             .foregroundColor(.gray)
-                    }
-                    
-                    HStack(spacing: 12) {
-                        Button {
-                            isShowingConfirmationScreen = true
-                        } label: {
-                            Text("Accept")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 35)
-                                .padding(.vertical, 7)
-                                .background(Color.blue)
-                                .cornerRadius(8)
+                        
+                        HStack(spacing: 2) {
+                            ForEach(0..<5, id: \.self) { _ in
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(.yellow)
+                                    .font(.system(size: 12))
+                            }
+                            Text("(\(reviews))")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
                         }
                         
-                        Button(action: {}) {
-                            Text("Decline")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.black)
-                                .padding(.horizontal, 35)
-                                .padding(.vertical, 7)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
+                        HStack() {
+                            
+                            
+                            Button {
+                                isShowingConfirmationScreen = true
+                            } label: {
+                                Text("Accept")
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 35)
+                                    .padding(.vertical, 7)
+                                    .background(Color.blue)
+                                    .cornerRadius(8)
+                               
+                            }
+                            
+//                            PrimaryButton(
+//                                title: "Accept",
+//                                action: {  isShowingConfirmationScreen = true},
+//                                backgroundColor: .primaryBlue,
+//                                textColor: .white,
+//                                
+//                            )
+//                            
+                            
+                            
                         }
+              
                     }
-                    .padding(.top, 4)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
             }
             .padding()
             .background(Color.white)
