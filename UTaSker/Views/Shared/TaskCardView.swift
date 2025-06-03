@@ -30,13 +30,13 @@ struct TaskCardView: View {
             HStack(spacing: 12) {
                 Image(systemName: task.iconName)
                     .resizable()
-                    .aspectRatio(1.0, contentMode: .fill)
-                    .frame(width: 14, height: 14)
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
                     .padding()
                     .foregroundColor(.primary)
                     .background(Color.lightBlue)
                     .cornerRadius(10)
-
+                
                 VStack(alignment: .leading, spacing: 2) {
                     Text(task.title)
                         .font(.subheadline)
@@ -49,11 +49,12 @@ struct TaskCardView: View {
                 }
             }.padding(.top, 3)
 
-            VStack (alignment: .leading) {
+     
                 Text(task.description)
                     .font(.subheadline)
                     .foregroundColor(.textColor2)
-            }
+                    .multilineTextAlignment(.leading)
+            
         }
         .padding()
         .background(Color.white)
@@ -69,7 +70,7 @@ struct TaskCardView: View {
         title: "Laptop Setup",
         building: "Building 11",
         distance: "150m",
-        description: "Need help setting up a new laptop Need help setting up a new laptop Need help setting up a new laptop",
+        description: "Organize books back unto the shelves in alphabetical order",
         iconName: "laptopcomputer",
         price: "$30",
         status: "Completed",
