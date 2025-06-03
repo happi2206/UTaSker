@@ -74,6 +74,7 @@ struct TaskCardView: View {
         iconName: "laptopcomputer",
         price: "$30",
         status: "Completed",
-        isMyTask: false
+        isMyTask: false,
+      isCurrentTask: false
     ))
 }

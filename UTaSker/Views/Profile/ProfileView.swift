@@ -46,15 +46,7 @@ struct ProfileView: View {
                         .foregroundColor(.textColor2)
                 }.padding(.top, 10)
         
-                HStack(spacing: 2) {
-                    ForEach(0..<5) { index in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                    }
-                    Text("(24 Reviews)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                }
+                RatingsRow(rating: 2, numRatings: 100, showRatingCount: true)
  
                 HStack(spacing: 10) {
                     ReviewBanner( text: "On Time")
@@ -93,6 +85,32 @@ struct ReviewBanner: View {
             .background(Color.blue.opacity(0.1))
             .clipShape(Capsule())
             .multilineTextAlignment(.center)
+    }
+}
+
+struct RatingsRow: View {
+    @State var rating: Int
+    @State var numRatings: Int
+    @State var showRatingCount: Bool
+    
+    init(rating: Int, numRatings: Int, showRatingCount: Bool) {
+        self.rating = rating
+        self.numRatings = numRatings
+        self.showRatingCount = showRatingCount
+    }
+    
+    var body: some View {
+        HStack(spacing: 2) {
+            ForEach(0..<5) { index in
+                Image(systemName: "star.fill")
+                    .foregroundColor(index + 1 <= rating ? .yellow : .mainGray)
+            }
+            if (showRatingCount) {
+                Text("(\(numRatings) Reviews)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+        }
     }
 }
 #Preview {

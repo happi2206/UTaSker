@@ -22,7 +22,8 @@ struct SampleTasks {
             price: "$5",
             status: "Open",
             isMyTask: true ,
-            images: ["Home1"]
+            images: ["Home1"],
+            isCurrentTask: false
           
         ),
         TaskModel(
@@ -36,7 +37,8 @@ struct SampleTasks {
             price: "Free",
             status: "Open",
             isMyTask: true ,
-            images: ["Home2"]
+            images: ["Home2"],
+            isCurrentTask: false
         ),
         TaskModel(
             date: "Fri 31 May",
@@ -49,7 +51,8 @@ struct SampleTasks {
             price: "$15",
             status: "Awaiting Review",
             isMyTask: true ,
-            images: ["Home3"]
+            images: ["Home3"],
+            isCurrentTask: false
         ),
         TaskModel(
             date: "Sat 1 Jun",
@@ -62,7 +65,8 @@ struct SampleTasks {
             price: "$20",
             status: "Pending",
             isMyTask: false ,
-            images: ["Home1"]
+            images: ["Home1"],
+            isCurrentTask: false
         ),
         TaskModel(
             date: "Sat 1 Jun",
@@ -75,7 +79,8 @@ struct SampleTasks {
             price: "$10",
             status: "Completed",
             isMyTask: false ,
-            images: ["Home2"]
+            images: ["Home2"],
+            isCurrentTask: false
         ),
         TaskModel(
             date: "Sat 1 Jun",
@@ -88,7 +93,8 @@ struct SampleTasks {
             price: "$5",
             status: "Open",
             isMyTask: false ,
-            images: ["Home3"]
+            images: ["Home3"],
+            isCurrentTask: false
         ),
         TaskModel(
             date: "Sun 2 Jun",
@@ -101,7 +107,8 @@ struct SampleTasks {
             price: "Free",
             status: "Open",
             isMyTask: false ,
-            images: ["Home2"]
+            images: ["Home2"],
+          isCurrentTask: false
         ),
         TaskModel(
             date: "Sun 2 Jun",
@@ -114,7 +121,8 @@ struct SampleTasks {
             price: "$8",
             status: "Open",
             isMyTask: false ,
-            images: ["Home2"]
+            images: ["Home2"],
+            isCurrentTask: false
         ),
         TaskModel(
             date: "Mon 3 Jun",
@@ -127,7 +135,8 @@ struct SampleTasks {
             price: "$12",
             status: "Open",
             isMyTask: false ,
-            images: ["Home2"]
+            images: ["Home2"],
+            isCurrentTask: false
         )
     ]
 }

@@ -9,12 +9,11 @@ import SwiftUI
 
 struct TaskDetailView: View {
     let task: TaskModel
+    @State var showStatusSheet = false
     
     @State private var isOffersSheetShowing: Bool = false
     var body: some View {
         NavigationStack {
-            
-            
             VStack {
                 HStack {
                    
@@ -47,12 +46,12 @@ struct TaskDetailView: View {
                             .cornerRadius(10)
                         
                         VStack(alignment: .leading) {
-                            Text("Laptop Setup")
+                            Text(task.title)
                                 .font(.subheadline)
                                 .foregroundColor(.textColor1)
                                 .fontWeight(.medium)
                             Text(
-                                "Need help with setting up a laptop."
+                                task.description.components(separatedBy: ".")[0] + "."
                             ) //task.description.components(separatedBy: ".")[0] + "."
                             .font(.footnote)
                             .foregroundColor(.textColor2)
@@ -101,7 +100,7 @@ struct TaskDetailView: View {
                         .padding(.bottom, 10)
                     HStack {
                         Text(
-                            "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up?"
+                          task.description
                         ) //task.description
                         .font(.footnote)
                         .foregroundColor(.textColor2)
@@ -120,10 +119,8 @@ struct TaskDetailView: View {
                     
                     HStack {
                         Image(systemName: "calendar")
-                        Text(
-                            "Thu 11, May · 3 PM"
-                        ) //"\(task.date) · \(task.time)"
-                        .fontWeight(.medium)
+                        Text("\(task.date) · \(task.time)")
+                            .fontWeight(.medium)
                     }
                     
                     Divider()
@@ -131,7 +128,7 @@ struct TaskDetailView: View {
                     
                     HStack {
                         Image(systemName: "creditcard")
-                        Text("$30") //task.price
+                        Text(task.price) //
                     }
                     
                     Divider()
@@ -141,7 +138,7 @@ struct TaskDetailView: View {
                         Text("Location")
                             .font(.footnote)
                             .foregroundColor(.textColor2)
-                        Text("Building 11, Level 3, Room 300 (CB11.03.300)")
+                        Text(task.building)
                     }
                     
                     HStack {
@@ -183,7 +180,7 @@ struct TaskDetailView: View {
                             textColor: .white
                         )
                     }
-                } else {
+                } else
                     if task.status == "Open" {
                         NavigationLink(
                             destination: ConfirmationScreenView(
@@ -219,6 +216,17 @@ struct TaskDetailView: View {
         .sheet(isPresented: $isOffersSheetShowing){
             OffersView()
         }
+// .sheet(isPresented: $showStatusSheet) {
+//                 TaskStatusSheetView()
+//                 .presentationDetents([.fraction(CGFloat(0.45))])
+//                     .presentationDragIndicator(.visible)
+
+// else if (task.isCurrentTask) {
+//                     PrimaryButton(title: "Update Status") {
+//                         showStatusSheet = true
+                            
+//                     }
+//                 }
         
         
 
@@ -234,9 +242,10 @@ struct TaskDetailView: View {
         title: "Laptop Setup",
         building: "Building 11",
         distance: "150m",
-        description: "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up?",
+        description: "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up? I've gotta test how long this can get so I'm just gonna keep writing and writing and blah blah blah wahooooooooooooooooooooooooooooo",
         iconName: "laptopcomputer",
         price: "$30",
         status: "Open",
-        isMyTask: true))
+        isMyTask: true,
+        isCurrentTask: false))
 }
