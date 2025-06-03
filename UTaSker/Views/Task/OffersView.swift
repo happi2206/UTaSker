@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+
 struct OffersView: View {
     var body: some View {
         NavigationStack {
@@ -32,7 +33,7 @@ struct OffersView: View {
                     Button(action: {
                         // handle back
                     }) {
-                        Image(systemName: "chevron.left")
+                        Image(systemName: "arrow.left")
                             .foregroundColor(.black)
                     }
                 }
@@ -46,57 +47,58 @@ struct OfferCard: View {
     var role: String
     var reviews: Int
     var imageName: String
-    
 
     var body: some View {
-        
-        HStack(alignment: .top, spacing: 16) {
+        HStack(alignment: .center, spacing: 12) {
             Image(imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 50, height: 50)
+                .frame(width: 55, height: 55)
                 .clipShape(Circle())
-                .padding()
-           
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text(name)
-                    .font(.headline)
+                    .font(.system(size: 16, weight: .semibold))
+
                 Text(role)
-                    .font(.subheadline)
+                    .font(.system(size: 14))
                     .foregroundColor(.gray)
 
-                HStack(spacing: 4) {
-                    Image(systemName: "star.fill")
-                        .foregroundColor(.yellow)
-                    Text("5.0")
-                    Text("(\(reviews) Reviews)")
-                        .foregroundColor(.gray)
+                // 5 yellow stars in a row
+                HStack(spacing: 2) {
+                    ForEach(0..<5) { _ in
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                            .font(.system(size: 12))
+                    }
+                    Text("(\(reviews))")
                         .font(.footnote)
+                        .foregroundColor(.gray)
                 }
 
-                HStack {
-                    Button("Accept") {
-                        
+                // Accept and Decline buttons
+                HStack(spacing: 12) {
+                    Button(action: {}) {
+                        Text("Accept")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 35)
+                            .padding(.vertical, 7)
+                            .background(Color.blue)
+                            .cornerRadius(8)
                     }
-                    .foregroundColor(.white)
-                    
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.blue)
-                    .cornerRadius(8)
 
-
-                    Button("Decline") {
-                        
+                    Button(action: {}) {
+                        Text("Decline")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 35)
+                            .padding(.vertical, 7)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
                     }
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
                 }
-                .padding(.top, 8)
+                .padding(.top, 4)
             }
 
             Spacer()
@@ -104,7 +106,7 @@ struct OfferCard: View {
         .padding()
         .background(Color.white)
         .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
     }
 }
 
