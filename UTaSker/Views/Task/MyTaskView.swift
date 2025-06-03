@@ -14,11 +14,11 @@ struct MyTaskView: View {
     let filters = ["All", "Open", "Pending", "Ongoing", "Awaiting Review", "Completed", "Cancelled"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.primaryLight).ignoresSafeArea()
                 
-                VStack(spacing: 16) {
+                VStack(spacing: 10) {
                     // Header with notification icon
                     HStack {
                         Text("Tasks")
@@ -68,8 +68,10 @@ struct MyTaskView: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             ForEach(filteredTasks) { task in
-                                MyTaskCardView(task: task)
-                                    .padding(.horizontal)
+                                NavigationLink(destination: TaskDetailView(task: task)){
+                                    MyTaskCardView(task: task)
+                                        .padding(.horizontal)
+                                }
                             }
                         }
                     }
