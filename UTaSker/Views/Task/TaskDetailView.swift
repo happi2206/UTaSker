@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskDetailView: View {
     let task: TaskModel
+    @State var showStatusSheet = false
     
     var body: some View {
         VStack {
@@ -165,12 +166,23 @@ struct TaskDetailView: View {
                     print("yayyy")
                 }
             }
-            else{
+            else if (!task.isMyTask && !task.isCurrentTask) {
                 PrimaryButton(title: "Send a Request") {
                     print("wahoo")
                 }
             }
+            else if (task.isCurrentTask) {
+                PrimaryButton(title: "Update Status") {
+                    showStatusSheet = true
+                        
+                }
+            }
             
+        }
+        .sheet(isPresented: $showStatusSheet) {
+                TaskStatusSheetView()
+                .presentationDetents([.fraction(CGFloat(0.45))])
+                    .presentationDragIndicator(.visible)
         }
         .padding()
     }
@@ -187,5 +199,6 @@ struct TaskDetailView: View {
         iconName: "laptopcomputer",
         price: "$30",
         status: "Completed",
-        isMyTask: true))
+        isMyTask: true,
+        isCurrentTask: false))
 }
