@@ -11,6 +11,7 @@ struct ReviewRow: View {
     let name: String
     let role: String
     let comment: String?
+    let rating: Int
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -29,7 +30,7 @@ struct ReviewRow: View {
                         .font(.footnote)
                 }
             }
-
+            RatingsRow(rating: rating, numRatings: 0, showRatingCount: false)
             if let comment = comment {
                 Text(comment)
                     .font(.subheadline)
@@ -37,4 +38,8 @@ struct ReviewRow: View {
             }
         }
     }
+}
+
+#Preview {
+    ReviewRow(name: "DUMMY", role: "DUMMY", comment: "I'M A DUMMY", rating: 3)
 }
