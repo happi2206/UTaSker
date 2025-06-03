@@ -16,7 +16,7 @@ struct TaskDetailView: View {
         NavigationStack {
             VStack {
                 HStack {
-                   
+                    
                     
                     Text("Task Details")
                         .font(.title3)
@@ -100,7 +100,7 @@ struct TaskDetailView: View {
                         .padding(.bottom, 10)
                     HStack {
                         Text(
-                          task.description
+                            task.description
                         ) //task.description
                         .font(.footnote)
                         .foregroundColor(.textColor2)
@@ -181,56 +181,55 @@ struct TaskDetailView: View {
                         )
                     }
                 } else
-                    if task.status == "Open" {
-                        NavigationLink(
-                            destination: ConfirmationScreenView(
-                                title: "You've made a request!",
-                                description: "Please wait for the poster to review your profile and contact you for the next steps.",
-                                buttonText: "View Your Task"
-                            )
-                        ) {
-                            Text("Send a Request")
-                                .padding()
-                                .frame(
-                                    maxWidth: .infinity
-                                ) // Make the button fill horizontally
-                                .background(Color.primaryBlue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    } else {
-                        PrimaryButton(
-                            title: task.status,
-                            action: { print("hey") },
-                            backgroundColor: .primaryDark,
-                            textColor: .white
+                if task.status == "Open" {
+                    NavigationLink(
+                        destination: ConfirmationScreenView(
+                            title: "You've made a request!",
+                            description: "Please wait for the poster to review your profile and contact you for the next steps.",
+                            buttonText: "View Your Task"
                         )
+                    ) {
+                        Text("Send a Request")
+                            .padding()
+                            .frame(
+                                maxWidth: .infinity
+                            ) // Make the button fill horizontally
+                            .background(Color.primaryBlue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
                     }
+                } else {
+                    PrimaryButton(
+                        title: task.status,
+                        action: { print("hey") },
+                        backgroundColor: .primaryDark,
+                        textColor: .white
+                    )
                 }
-
-                
             }
-            .padding()
+            
+            
         }
-        
+        .padding()
+    }
+    
         .sheet(isPresented: $isOffersSheetShowing){
             OffersView()
         }
-// .sheet(isPresented: $showStatusSheet) {
-//                 TaskStatusSheetView()
-//                 .presentationDetents([.fraction(CGFloat(0.45))])
-//                     .presentationDragIndicator(.visible)
-
-// else if (task.isCurrentTask) {
-//                     PrimaryButton(title: "Update Status") {
-//                         showStatusSheet = true
-                            
-//                     }
-//                 }
-        
-        
-
-    }
+    // .sheet(isPresented: $showStatusSheet) {
+    //                 TaskStatusSheetView()
+    //                 .presentationDetents([.fraction(CGFloat(0.45))])
+    //                     .presentationDragIndicator(.visible)
+    
+    // else if (task.isCurrentTask) {
+    //                     PrimaryButton(title: "Update Status") {
+    //                         showStatusSheet = true
+    
+    //                     }
+    //                 }
+    
+    
+    
 }
 
 
