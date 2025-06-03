@@ -211,11 +211,12 @@ struct TaskDetailView: View {
             
         }
         .padding()
-    }
-    
         .sheet(isPresented: $isOffersSheetShowing){
             OffersView()
         }
+    }
+    
+        
     // .sheet(isPresented: $showStatusSheet) {
     //                 TaskStatusSheetView()
     //                 .presentationDetents([.fraction(CGFloat(0.45))])
