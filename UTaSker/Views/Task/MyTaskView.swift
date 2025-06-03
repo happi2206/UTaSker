@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MyTaskView: View {
     @State private var selectedTab = 0
-    @State private var selectedFilter = "Pending"
+    @State private var selectedFilter = "All"
     
-    let filters = ["All", "Pending", "Ongoing", "Awaiting Review", "Completed", "Cancelled"]
+    let filters = ["All", "Open", "Pending", "Ongoing", "Awaiting Review", "Completed", "Cancelled"]
     
     var body: some View {
         NavigationView {

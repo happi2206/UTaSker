@@ -23,6 +23,7 @@ struct DueSoonTaskCard: View {
                 Text(task.description)
                     .font(.caption)
                     .foregroundColor(.textColor2)
+                    .multilineTextAlignment(.leading)
                     .lineLimit(3)
                     .truncationMode(.tail)
                     .padding(.bottom, 16)
