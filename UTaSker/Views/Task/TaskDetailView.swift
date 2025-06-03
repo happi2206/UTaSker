@@ -10,7 +10,7 @@ import SwiftUI
 struct TaskDetailView: View {
     let task: TaskModel
     
-   @State private var isOffersSheetShowing: Bool = false
+    @State private var isOffersSheetShowing: Bool = false
     var body: some View {
         NavigationStack {
             
@@ -185,10 +185,21 @@ struct TaskDetailView: View {
                     }
                 } else {
                     if task.status == "Open" {
-                        NavigationLink(destination: TaskDetailView(task: task)) {
-                            PrimaryButton(title: "Send a Request") {
-                                print("wahoo")
-                            }
+                        NavigationLink(
+                            destination: ConfirmationScreenView(
+                                title: "You've made a request!",
+                                description: "Please wait for the poster to review your profile and contact you for the next steps.",
+                                buttonText: "View Your Task"
+                            )
+                        ) {
+                            Text("Send a Request")
+                                .padding()
+                                .frame(
+                                    maxWidth: .infinity
+                                ) // Make the button fill horizontally
+                                .background(Color.primaryBlue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
                     } else {
                         PrimaryButton(

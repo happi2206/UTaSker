@@ -13,6 +13,7 @@ struct TaskFormView: View {
     @State private var date = Date()
     @State private var selectedLocation = "In person"
     @State private var notes: String = ""
+    @State private var isSuccessScreenShowing: Bool = false
     
     let totalSteps = 5
 
@@ -178,7 +179,7 @@ struct TaskFormView: View {
                 action: {   if currentStep < totalSteps - 1 {
                     currentStep += 1
                 } else {
-                   
+                    isSuccessScreenShowing = true
                 }},
                 backgroundColor: .primaryBlue,
                 textColor: .white,
@@ -188,7 +189,16 @@ struct TaskFormView: View {
         }
         .padding(.horizontal)
         .presentationDetents([.medium, .large])
+        
+        .sheet(isPresented: $isSuccessScreenShowing){
+            ConfirmationScreenView(
+                title: "Your Task Has Been Posted!",
+                description: "Students can now view and apply to your task.",
+                buttonText: "View Your Task"
+            )
+        }
     }
+    
 }
 
 
