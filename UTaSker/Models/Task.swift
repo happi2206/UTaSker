@@ -20,6 +20,7 @@ struct TaskModel: Identifiable {
     let images: [String]?
     let status: String
     let isMyTask: Bool
+    let isCurrentTask: Bool
 
    
     init(
@@ -33,7 +34,8 @@ struct TaskModel: Identifiable {
         price: String,
         status: String,
         isMyTask: Bool,
-        images: [String]? = nil
+        images: [String]? = nil,
+        isCurrentTask: Bool
     ) {
         self.date = date
         self.time = time
@@ -46,5 +48,6 @@ struct TaskModel: Identifiable {
         self.images = images
         self.status = status
         self.isMyTask = isMyTask
+        self.isCurrentTask = isCurrentTask
     }
 }
