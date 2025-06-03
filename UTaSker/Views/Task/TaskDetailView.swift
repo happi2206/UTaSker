@@ -11,7 +11,6 @@ struct TaskDetailView: View {
     let task: TaskModel
     
    @State private var isOffersSheetShowing: Bool = false
-    @State private var isShowingConfirmationSheet = false
     var body: some View {
         NavigationStack {
             
@@ -214,25 +213,11 @@ struct TaskDetailView: View {
         }
         
         .sheet(isPresented: $isOffersSheetShowing){
-            OffersView(
-                showConfirmationSheet: $isShowingConfirmationSheet,
-                                dismissBothSheets: {
-                                    isOffersSheetShowing = false
-                                    isShowingConfirmationSheet = false
-                                }
-            )
+            OffersView()
         }
         
         
-        
-        .sheet(isPresented: $isShowingConfirmationSheet) {
-            ConfirmationScreenView(title: "You've Assigned Sophia Carter to Your Task!" , description: "They're ready to help you with ...", buttonText: "Contact Sophia",
-                        onDismissAll: {
-                            isOffersSheetShowing = false
-                            isShowingConfirmationSheet = false
-                        }
-                    )
-                }
+
     }
 }
 

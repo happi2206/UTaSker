@@ -12,8 +12,7 @@ struct ConfirmationScreenView: View {
     var description: String = "Your task has been requested. We will contact you soon."
     var buttonText: String = "View Your Task"
     @Environment(\.dismiss) var dismiss
-    var onDismissAll: () -> Void?
-    
+ 
     var body: some View {
         NavigationStack {
             
@@ -36,7 +35,7 @@ struct ConfirmationScreenView: View {
                         
                         
                         Button(action: {
-                            onDismissAll()
+                            dismiss()
             
     
                         }) {
