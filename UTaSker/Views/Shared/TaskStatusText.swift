@@ -3,6 +3,8 @@ import SwiftUI
 struct TaskStatusText {
     static func getColor(for status: String) -> Color {
         switch status.lowercased() {
+        case "open":
+            return Color.primaryGreen
         case "pending":
             return Color.orange
         case "ongoing":
@@ -10,7 +12,7 @@ struct TaskStatusText {
         case "awaiting review":
             return Color.red
         case "completed":
-            return Color.primaryGreen
+            return Color.gray
         case "cancelled":
             return Color.gray
         default:

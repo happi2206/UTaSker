@@ -11,14 +11,12 @@ struct TaskDetailView: View {
     let task: TaskModel
     @State var showStatusSheet = false
     
+    @State private var isOffersSheetShowing: Bool = false
     var body: some View {
-        ScrollView {
+        NavigationStack {
             VStack {
                 HStack {
-                    //Button {
-                    Image(systemName: "arrow.left")
-                    
-                    Spacer()
+                   
                     
                     Text("Task Details")
                         .font(.title3)
@@ -52,9 +50,11 @@ struct TaskDetailView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.textColor1)
                                 .fontWeight(.medium)
-                            Text(task.description.components(separatedBy: ".")[0] + ".")
-                                .font(.footnote)
-                                .foregroundColor(.textColor2)
+                            Text(
+                                task.description.components(separatedBy: ".")[0] + "."
+                            ) //task.description.components(separatedBy: ".")[0] + "."
+                            .font(.footnote)
+                            .foregroundColor(.textColor2)
                         }
                         Spacer()
                     }
@@ -99,10 +99,12 @@ struct TaskDetailView: View {
                         .foregroundColor(.textColor1)
                         .padding(.bottom, 10)
                     HStack {
-                        Text(task.description)
-                            .font(.footnote)
-                            .foregroundColor(.textColor2)
-                            .lineSpacing(CGFloat(7))
+                        Text(
+                          task.description
+                        ) //task.description
+                        .font(.footnote)
+                        .foregroundColor(.textColor2)
+                        .lineSpacing(CGFloat(7))
                         Spacer()
                     }
                 }
@@ -162,33 +164,76 @@ struct TaskDetailView: View {
                 }
                 
                 Spacer()
-                if(task.isMyTask){
-                    PrimaryButton(title: "View Offers") {
-                        print("yayyy")
+                if task.isMyTask {
+                    if task.status == "Open" {
+                        PrimaryButton(
+                            title: "View Offers",
+                            action: { isOffersSheetShowing = true },
+                            backgroundColor: .primaryBlue,
+                            textColor: .white
+                        )
+                    } else {
+                        PrimaryButton(
+                            title: task.status,
+                            action: { print("hey") },
+                            backgroundColor: .primaryDark,
+                            textColor: .white
+                        )
+                    }
+                } else
+                    if task.status == "Open" {
+                        NavigationLink(
+                            destination: ConfirmationScreenView(
+                                title: "You've made a request!",
+                                description: "Please wait for the poster to review your profile and contact you for the next steps.",
+                                buttonText: "View Your Task"
+                            )
+                        ) {
+                            Text("Send a Request")
+                                .padding()
+                                .frame(
+                                    maxWidth: .infinity
+                                ) // Make the button fill horizontally
+                                .background(Color.primaryBlue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    } else {
+                        PrimaryButton(
+                            title: task.status,
+                            action: { print("hey") },
+                            backgroundColor: .primaryDark,
+                            textColor: .white
+                        )
                     }
                 }
-                else if (!task.isMyTask && !task.isCurrentTask) {
-                    PrimaryButton(title: "Send a Request") {
-                        print("wahoo")
-                    }
-                }
-                else if (task.isCurrentTask) {
-                    PrimaryButton(title: "Update Status") {
-                        showStatusSheet = true
-                            
-                    }
-                }
+
                 
             }
+            .padding()
         }
-        .sheet(isPresented: $showStatusSheet) {
-                TaskStatusSheetView()
-                .presentationDetents([.fraction(CGFloat(0.45))])
-                    .presentationDragIndicator(.visible)
+        
+        .sheet(isPresented: $isOffersSheetShowing){
+            OffersView()
         }
-        .padding()
+// .sheet(isPresented: $showStatusSheet) {
+//                 TaskStatusSheetView()
+//                 .presentationDetents([.fraction(CGFloat(0.45))])
+//                     .presentationDragIndicator(.visible)
+
+// else if (task.isCurrentTask) {
+//                     PrimaryButton(title: "Update Status") {
+//                         showStatusSheet = true
+                            
+//                     }
+//                 }
+        
+        
+
     }
 }
+
+
 
 #Preview {
     TaskDetailView(task: TaskModel(
@@ -200,7 +245,7 @@ struct TaskDetailView: View {
         description: "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up? I've gotta test how long this can get so I'm just gonna keep writing and writing and blah blah blah wahooooooooooooooooooooooooooooo",
         iconName: "laptopcomputer",
         price: "$30",
-        status: "Completed",
+        status: "Open",
         isMyTask: true,
         isCurrentTask: false))
 }

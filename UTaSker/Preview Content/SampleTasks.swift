@@ -20,7 +20,7 @@ struct SampleTasks {
             description: "Assist in setting up chairs for the event in Hall B.",
             iconName: "chair.lounge.fill",
             price: "$5",
-            status: "Pending",
+            status: "Open",
             isMyTask: true ,
             images: ["Home1"],
             isCurrentTask: false
@@ -35,7 +35,7 @@ struct SampleTasks {
             description: "Organize books back onto the shelves in alphabetical order.",
             iconName: "books.vertical",
             price: "Free",
-            status: "Ongoing",
+            status: "Open",
             isMyTask: true ,
             images: ["Home2"],
             isCurrentTask: false
@@ -75,7 +75,7 @@ struct SampleTasks {
             building: "Courtyard",
             distance: "50m",
             description: "Assist with selling cupcakes and managing payments.",
-            iconName: "cupcake",
+            iconName: "birthday.cake",
             price: "$10",
             status: "Completed",
             isMyTask: false ,
@@ -91,7 +91,7 @@ struct SampleTasks {
             description: "Practice speaking English with an international student.",
             iconName: "person.2.fill",
             price: "$5",
-            status: "Completed",
+            status: "Open",
             isMyTask: false ,
             images: ["Home3"],
             isCurrentTask: false
@@ -105,10 +105,10 @@ struct SampleTasks {
             description: "Dispose of trash, wipe tables, and restore chairs.",
             iconName: "trash.fill",
             price: "Free",
-            status: "Cancelled",
-            isMyTask: true ,
+            status: "Open",
+            isMyTask: false ,
             images: ["Home2"],
-            isCurrentTask: false
+          isCurrentTask: false
         ),
         TaskModel(
             date: "Sun 2 Jun",
@@ -119,7 +119,7 @@ struct SampleTasks {
             description: "Walk a friendly golden retriever for 30 mins.",
             iconName: "pawprint.fill",
             price: "$8",
-            status: "Completed",
+            status: "Open",
             isMyTask: false ,
             images: ["Home2"],
             isCurrentTask: false
@@ -133,7 +133,7 @@ struct SampleTasks {
             description: "Guide new students and distribute flyers.",
             iconName: "megaphone.fill",
             price: "$12",
-            status: "Ongoing",
+            status: "Open",
             isMyTask: false ,
             images: ["Home2"],
             isCurrentTask: false
