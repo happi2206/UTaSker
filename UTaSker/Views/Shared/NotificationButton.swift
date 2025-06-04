@@ -11,7 +11,12 @@ struct NotificationButtonView: View {
     
     var body: some View {
         NavigationLink(destination: NotificationsView()) {
-            NotificationButtonView()
+            Image(systemName: "bell.badge")
+                .symbolRenderingMode(.multicolor)
+                .symbolVariant(.none)
+                .fontWeight(.regular)
+                .foregroundColor(.primaryBlue)
+                .symbolEffect(.wiggle)
         }
         
 
