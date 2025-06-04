@@ -9,9 +9,20 @@ import SwiftUI
 
 @main
 struct UTaSkerApp: App {
+    @AppStorage("hasLaunched") private var hasLaunched = false
+    init() {
+        UITabBar.appearance().backgroundColor = .white
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if hasLaunched {
+                MainTabView()
+            }
+            else{
+                SplashScreenView {
+                    hasLaunched = true
+                }
+            }
         }
     }
 }
