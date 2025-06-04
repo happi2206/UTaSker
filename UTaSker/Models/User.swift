@@ -7,6 +7,6 @@
 
 import SwiftUI
 
-//struct UserModel: Identifiable {
-//    
-//}
+struct UserModel: Identifiable {
+    
+}
