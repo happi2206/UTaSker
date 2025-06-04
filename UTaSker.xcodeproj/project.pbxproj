@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C4CDB43B2DF01DD200F52CFE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C4CDB43A2DF01DD200F52CFE /* FirebaseAuth */; };
+		C4CDB43D2DF01DD200F52CFE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C4CDB43C2DF01DD200F52CFE /* FirebaseFirestore */; };
+		C4CDB43F2DF01DD200F52CFE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C4CDB43E2DF01DD200F52CFE /* FirebaseStorage */; };
+		C4CDB4412DF10C4000F52CFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4CDB4402DF10C4000F52CFE /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C4C8BEC02DE953FB0020CD9D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +34,7 @@
 		C4C8BEB22DE953F90020CD9D /* UTaSker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UTaSker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C8BEBF2DE953FB0020CD9D /* UTaSkerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UTaSkerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C8BEC92DE953FB0020CD9D /* UTaSkerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UTaSkerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4CDB4402DF10C4000F52CFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4CDB43B2DF01DD200F52CFE /* FirebaseAuth in Frameworks */,
+				C4CDB43D2DF01DD200F52CFE /* FirebaseFirestore in Frameworks */,
+				C4CDB43F2DF01DD200F52CFE /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +86,7 @@
 		C4C8BEA92DE953F90020CD9D = {
 			isa = PBXGroup;
 			children = (
+				C4CDB4402DF10C4000F52CFE /* GoogleService-Info.plist */,
 				C4C8BEB42DE953F90020CD9D /* UTaSker */,
 				C4C8BEC22DE953FB0020CD9D /* UTaSkerTests */,
 				C4C8BECC2DE953FB0020CD9D /* UTaSkerUITests */,
@@ -112,6 +124,9 @@
 			);
 			name = UTaSker;
 			packageProductDependencies = (
+				C4CDB43A2DF01DD200F52CFE /* FirebaseAuth */,
+				C4CDB43C2DF01DD200F52CFE /* FirebaseFirestore */,
+				C4CDB43E2DF01DD200F52CFE /* FirebaseStorage */,
 			);
 			productName = UTaSker;
 			productReference = C4C8BEB22DE953F90020CD9D /* UTaSker.app */;
@@ -195,6 +210,9 @@
 			);
 			mainGroup = C4C8BEA92DE953F90020CD9D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C4CDB4392DF01DD200F52CFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C4C8BEB32DE953F90020CD9D /* Products */;
 			projectDirPath = "";
@@ -212,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4CDB4412DF10C4000F52CFE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +577,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C4CDB4392DF01DD200F52CFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C4CDB43A2DF01DD200F52CFE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4CDB4392DF01DD200F52CFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C4CDB43C2DF01DD200F52CFE /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4CDB4392DF01DD200F52CFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		C4CDB43E2DF01DD200F52CFE /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4CDB4392DF01DD200F52CFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C4C8BEAA2DE953F90020CD9D /* Project object */;
 }

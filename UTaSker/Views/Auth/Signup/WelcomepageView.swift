@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct welcomepage: View {
+struct WelcomepageView: View {
     var body: some View {
         VStack(spacing: 0) {
             
@@ -69,5 +69,5 @@ struct welcomepage: View {
 }
 
 #Preview {
-    welcomepage()
+    WelcomepageView()
 }
