@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum TaskCategory: String, CaseIterable {
-    case labour, academic, assistance
+    case labour, academic, assistance, DUMMY
 }
 
 enum Price {
@@ -103,6 +103,23 @@ struct NewTaskModel: Identifiable {
         self.requirements = requirements
         self.images = images
         self.taskStatus = taskStatus
+    }
+    
+    init() { /*itialises a dummy Task*/
+        self.id = UUID()
+        self.posterID = UUID()
+        self.taskerID = nil
+        self.date = Date.now
+        self.title = "Dummy Post"
+        self.description = "This is a dummy post. It doesn't have any real users associated with it and thus cannot be completed. All values are default values. Good for testing!  "
+        self.location = "Builing Dummy, floor Dummy, room Dummy. BDummy.Dummy.Dummy00"
+        self.distance = 0
+        self.iconName = "person.slash"
+        self.price = .payment(0)
+        self.category = .DUMMY
+        self.requirements = nil
+        self.images = nil
+        self.taskStatus = .open
     }
    
 }
