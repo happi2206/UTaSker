@@ -25,13 +25,13 @@ struct ConfirmationScreenView: View {
                     
                     HStack {
                         Spacer()
-                        Text("Task Requested")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.leading)
-                            .foregroundColor(.black)
-                            .padding(.top, 8)
-                            .padding(.horizontal, 80)
+//                        Text("Task Requested")
+//                            .font(.headline)
+//                            .fontWeight(.bold)
+//                            .multilineTextAlignment(.leading)
+//                            .foregroundColor(.black)
+//                            .padding(.top, 8)
+//                            .padding(.horizontal, 80)
                         
                         
                         Button(action: {
