@@ -133,7 +133,7 @@ struct NotificationsView: View {
     ]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 12) {
                     ForEach(notifications) { notification in
@@ -154,16 +154,16 @@ struct NotificationsView: View {
             .background(Color(uiColor: .primaryLight))
             .navigationTitle("Notifications(\(notifications.count))")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {}) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.black)
-                    }
-                }
-            }
-            .toolbarBackground(.white, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button(action: {}) {
+//                        Image(systemName: "chevron.left")
+//                            .foregroundColor(.black)
+//                    }
+//                }
+//            }
+//            .toolbarBackground(.white, for: .navigationBar)
+           //           .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }

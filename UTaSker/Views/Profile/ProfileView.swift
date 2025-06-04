@@ -21,12 +21,7 @@ struct ProfileView: View {
                     Text("Profile")
                         .font(.headline)
                     Spacer()
-                    Image(systemName: "bell.badge")
-                        .symbolRenderingMode(.multicolor)
-                        .symbolVariant(.none)
-                        .fontWeight(.regular)
-                        .foregroundColor(.primaryBlue)
-                        .symbolEffect(.wiggle)
+                    NotificationButtonView()
                 }
                 .padding(.horizontal)
 
