@@ -10,10 +10,10 @@
 import SwiftUI
 
 struct AcceptOfferPreviewView: View {
-    let task: TaskModel
+  
     
     
-    var usersName: String = "Sophia"
+    var usersName: String
     @Environment(\.dismiss) var dismiss
 
     @State private var isShowingConfirmationScreen = false
@@ -25,14 +25,7 @@ struct AcceptOfferPreviewView: View {
             NavigationStack {
                 VStack(spacing: 20) {
                     // Header
-                    HStack {
-                        Text("Accept Offer")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                        
-                        Spacer()
-                    }
-                    .padding()
+                 
                     
                     HStack {
                         Image("FemalePlaceholder")
@@ -45,7 +38,7 @@ struct AcceptOfferPreviewView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.textColor1)
                                 .fontWeight(.medium)
-                            Text(task.description)
+                            Text("task description of task.")
                                 .font(.footnote)
                                 .foregroundColor(.textColor2)
                                 .lineLimit(2)
@@ -70,7 +63,7 @@ struct AcceptOfferPreviewView: View {
                                 Text("Task Price")
                                     .foregroundColor(.gray)
                                 Spacer()
-                                Text(task.price)
+                                Text("$30")
                             }
                             
                             // Connection Fee
@@ -168,8 +161,9 @@ struct AcceptOfferPreviewView: View {
                     .padding(.bottom)
                 }
                 .background(Color(.systemGray6))
-                .navigationBarHidden(true)
+              
             }
+            .navigationTitle("Accept Offer")
             
         }
     }
@@ -184,16 +178,5 @@ struct Offer: Identifiable {
 }
 
 #Preview {
-    AcceptOfferPreviewView(task: TaskModel(
-        date: "Thu 29 May",
-        time: "10 AM",
-        title: "Laptop Setup",
-        building: "Building 11",
-        distance: "150m",
-        description: "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up? I've gotta test how long this can get so I'm just gonna keep writing and writing and blah blah blah wahooooooooooooooooooooooooooooo",
-        iconName: "laptopcomputer",
-        price: "$30",
-        status: "Open",
-        isMyTask: true,
-        isCurrentTask: false))
+    AcceptOfferPreviewView(usersName: "Sophia")
 }

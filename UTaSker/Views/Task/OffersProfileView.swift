@@ -73,20 +73,37 @@ struct OffersProfileView: View {
                     }.frame(height: 270)
                     
                     HStack{
-                        PrimaryButton(
-                            title: "Accept",
-                            action: { isShowingConfirmationScreen = true },
-                            backgroundColor: .primaryBlue,
-                            textColor: .white,
-                            
-                        )
-                        PrimaryButton(
-                            title: "Decline",
-                            action: { dismiss() },
-                            backgroundColor: .primaryLight,
-                            textColor: .primaryBlue,
-                            
-                        )
+                        
+                        NavigationLink(destination: AcceptOfferPreviewView(usersName: "Sophia Carter")) {
+                            Text("Accept")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 45)
+                                .padding(.vertical, 17)
+                                .background(Color.blue)
+                                .fixedSize(
+                                    horizontal: true,
+                                    vertical: false
+                                )
+                                .cornerRadius(12)
+                        }
+                        
+                        
+                        Button(action: {dismiss()}){
+                            Text("Decline")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.primaryBlue)
+                                .padding(.horizontal, 45)
+                                .padding(.vertical, 17)
+                                .background(.primaryLight)
+                                .fixedSize(
+                                    horizontal: true,
+                                    vertical: false
+                                )
+                                .cornerRadius(12)
+                        }
+                       
+                      
                     }.padding()
                     
                     

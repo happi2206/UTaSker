@@ -129,7 +129,7 @@ struct OffersView: View {
                             
                            
                             Spacer()
-                            NavigationLink(destination: OffersProfileView()) {
+                            NavigationLink(destination: AcceptOfferPreviewView(usersName: "Sophia Carter")) {
                                 Text("Accept")
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.white)
