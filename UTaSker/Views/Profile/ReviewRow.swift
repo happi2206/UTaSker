@@ -14,6 +14,8 @@ struct ReviewRow: View {
     let rating: Int
 
     var body: some View {
+        
+        
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 12) {
                 Image("MalePlaceholder")
@@ -24,10 +26,10 @@ struct ReviewRow: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(name)
-                        .fontWeight(.semibold)
+                        .fontWeight(.semibold).multilineTextAlignment(.leading)
                     Text(role)
                         .foregroundColor(.textColor2)
-                        .font(.footnote)
+                        .font(.footnote).multilineTextAlignment(.leading)
                 }
             }
             RatingsRow(rating: rating, numRatings: 0, showRatingCount: false)
