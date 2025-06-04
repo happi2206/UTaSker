@@ -144,7 +144,7 @@ struct SampleTasks {
             title: "HELPPPPPPP",
             building: "Food Court",
             distance: "90m",
-            description: "I'M STUCK IN THE FOOD COURT. SOMEONE COME HELP ME PLEASE. JUST LET ME OUT.",
+            description: "I'M STUCK IN THE FOOD COURT. SOMEONE COME HELP ME PLEASE. JUST LET ME OUT. PLEASE OH MY GOD I'VE BEEN EATING CORN CHIPS AND SEAWEED AND I'VE BEEN DRINKING NOTHING BUT REDBULL. I'M GONNA DIE IN HERE.",
             iconName: "megaphone.fill",
             price: "$100",
             status: "Ongoing",
