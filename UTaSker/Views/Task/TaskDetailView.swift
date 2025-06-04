@@ -18,15 +18,13 @@ struct TaskDetailView: View {
                 HStack {
                     
                     
-                    Text("Task Details")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(.textColor1)
-                        .offset(x: -10)
-                    Spacer()
-                    if(task.isMyTask){
-                        Image(systemName: "square.and.pencil")
-                    }
+//                    Text("")
+//                        .font(.title3)
+//                        .fontWeight(.bold)
+//                        .foregroundColor(.textColor1)
+//                        .offset(x: -10)
+//                    Spacer()
+               
                 }
                 .padding(.horizontal, 8)
                 
@@ -64,11 +62,18 @@ struct TaskDetailView: View {
                     .padding(.vertical)
                     
                     VStack(alignment: .leading) {
-                        Text("Poster")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.textColor1)
-                            .padding(.bottom, 10)
+                        HStack (alignment: .top) {
+                            Text("Poster")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.textColor1)
+                                .padding(.bottom, 10)
+                            Spacer()
+                            if(task.isMyTask){
+                                Image(systemName: "square.and.pencil")
+                            }
+                        }
+                        
                         HStack {
                             Image("MalePlaceholder")
                                 .resizable()
@@ -213,7 +218,7 @@ struct TaskDetailView: View {
             }
             .padding()
             
-        }
+        }.navigationTitle("Task Details")
         .sheet(isPresented: $isOffersSheetShowing){
             OffersView()
         }

@@ -16,7 +16,7 @@ struct ProfileView: View {
                 
            
                 HStack {
-                    Image(systemName: "chevron.left")
+//                    Image(systemName: "chevron.left")
                     Spacer()
                     Text("Profile")
                         .font(.headline)
