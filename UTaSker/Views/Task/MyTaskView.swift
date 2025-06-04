@@ -27,12 +27,7 @@ struct MyTaskView: View {
                         
                         Spacer()
                         
-                        Image(systemName: "bell.badge")
-                            .symbolRenderingMode(.multicolor)
-                            .symbolVariant(.none)
-                            .fontWeight(.regular)
-                            .foregroundColor(.primaryBlue)
-                            .symbolEffect(.wiggle)
+                        NotificationButtonView()
                     }
                     .padding(.horizontal)
                     

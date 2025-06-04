@@ -29,12 +29,7 @@ struct HomeView: View {
                                 print("hey")
                                 /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
                             } label: {
-                                Image(systemName: "bell.badge")
-                                    .symbolRenderingMode(.multicolor)
-                                    .symbolVariant(.none)
-                                    .fontWeight(.regular)
-                                    .foregroundColor(.primaryBlue)
-                                    .symbolEffect(.wiggle)
+                                NotificationButtonView()
                             }
                             
                             
