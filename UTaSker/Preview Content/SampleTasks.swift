@@ -137,6 +137,20 @@ struct SampleTasks {
             isMyTask: false ,
             images: ["Home2"],
             isCurrentTask: false
+        ),
+        TaskModel(
+            date: "Tue 15 Jun",
+            time: "3 AM",
+            title: "HELPPPPPPP",
+            building: "Food Court",
+            distance: "90m",
+            description: "I'M STUCK IN THE FOOD COURT. SOMEONE COME HELP ME PLEASE. JUST LET ME OUT.",
+            iconName: "megaphone.fill",
+            price: "$100",
+            status: "Ongoing",
+            isMyTask: false ,
+            images: ["Home2"],
+            isCurrentTask: false
         )
     ]
 }

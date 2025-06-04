@@ -200,27 +200,27 @@ struct TaskDetailView: View {
                     }
                 } else {
                     PrimaryButton(
-                        title: task.status,
-                        action: { print("hey") },
+                        title: "Update Status",
+                        action: {showStatusSheet = true },
                         backgroundColor: .primaryDark,
                         textColor: .white
                     )
                 }
             }
+            .padding()
             
             
         }
-        .padding()
         .sheet(isPresented: $isOffersSheetShowing){
             OffersView()
         }
+        .sheet(isPresented: $showStatusSheet) {
+            TaskStatusSheetView()
+                .presentationDetents([.fraction(CGFloat(0.45))])
+                .presentationDragIndicator(.visible)
+        }
     }
-    
         
-    // .sheet(isPresented: $showStatusSheet) {
-    //                 TaskStatusSheetView()
-    //                 .presentationDetents([.fraction(CGFloat(0.45))])
-    //                     .presentationDragIndicator(.visible)
     
     // else if (task.isCurrentTask) {
     //                     PrimaryButton(title: "Update Status") {
