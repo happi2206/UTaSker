@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
  
 struct HomeView: View {
+    @State private var userName: String = ""
     var body: some View {
         NavigationStack {
             ZStack {
@@ -19,7 +22,7 @@ struct HomeView: View {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
                                 
-                                Text("Hi Ashton 👋")
+                                Text("Hi \(userName) 👋")
                                     .font(.title3)
                                     .fontWeight(.bold)
                                     .foregroundColor(.textColor1)
@@ -64,7 +67,9 @@ struct HomeView: View {
                             
                             VStack (spacing: 16) {
                                 ForEach(SampleTasks.all) { task in
-                                    NavigationLink(destination: TaskDetailView(task: task)) {
+                                    NavigationLink(
+                                        destination: TaskDetailView(task: task)
+                                    ) {
                                         TaskCardView(task: task)
                                             .padding(.horizontal)
                                     }
@@ -77,6 +82,17 @@ struct HomeView: View {
                 }
             }
         }
+        
+        .onAppear {
+            UserService.shared.fetchUserProfile { profile in
+                if let profile = profile {
+                    self.userName = profile.firstName
+                } else {
+                    self.userName = "User"
+                }
+            }
+        }
+
     }
 }
 
