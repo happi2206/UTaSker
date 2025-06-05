@@ -64,21 +64,18 @@ struct SignInView: View {
                         .font(.caption)
                 }
 
-                if let error = viewModel.errorMessage {
-                    Text(error)
-                        .font(.subheadline)
-                        .foregroundColor(.red)
-                        .multilineTextAlignment(.leading)
-                }
+            
                 
                 PrimaryButton(
                     title: viewModel.isLoading ? "Signing In..." : "Sign In",
                     action: {
                         Task {
                             await viewModel.signIn()
+                            print("signed in")
                         }
                     },
-                    isDisabled: !isValidInput
+                    isDisabled: !isValidInput,
+                    isLoading: viewModel.isLoading ? true: false,
                 )
                 .padding(.top)
             }

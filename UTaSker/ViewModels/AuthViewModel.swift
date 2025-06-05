@@ -26,12 +26,7 @@ class AuthViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            guard result.user.isEmailVerified else {
-                errorMessage = "Please verify your email before signing in."
-                isLoading = false
-                return
-            }
+            let _ = try await Auth.auth().signIn(withEmail: email, password: password)
             isSignedIn = true
         } catch {
             errorMessage = error.localizedDescription

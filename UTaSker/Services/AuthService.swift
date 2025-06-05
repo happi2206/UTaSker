@@ -5,7 +5,6 @@
 //  Created by Happiness on 4/6/2025.
 //
 
-
 import FirebaseAuth
 
 class AuthService {
@@ -30,16 +29,14 @@ class AuthService {
             return
         }
         
-        Auth
-            .auth()
-            .createUser(withEmail: email, password: password) { result, error in
-                if let user = result?.user {
-                    user.sendEmailVerification()
-                    completion(.success(user))
-                } else {
-                    completion(.failure(error ?? NSError()))
-                }
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let user = result?.user {
+                user.sendEmailVerification()
+                completion(.success(user))
+            } else {
+                completion(.failure(error ?? NSError()))
             }
+        }
     }
 
     func login(
@@ -56,27 +53,14 @@ class AuthService {
             completion(.failure(error))
             return
         }
-        
-        Auth
-            .auth()
-            .signIn(withEmail: email, password: password) {
- result,
- error in
-                if let user = result?.user,
- user.isEmailVerified {
-                    completion(.success(user))
-                } else if let user = result?.user,
-                          !user.isEmailVerified {
-                    let error = NSError(
-                        domain: "",
-                        code: 401,
-                        userInfo: [NSLocalizedDescriptionKey: "Email not verified. Please check your inbox."]
-                    )
-                    completion(.failure(error))
-                } else {
-                    completion(.failure(error ?? NSError()))
-                }
+
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let user = result?.user {
+                completion(.success(user)) 
+            } else {
+                completion(.failure(error ?? NSError()))
             }
+        }
     }
 
     func signOut() throws {
