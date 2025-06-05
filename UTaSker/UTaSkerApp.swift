@@ -18,14 +18,7 @@ struct UTaSkerApp: App {
     }
     var body: some Scene {
         WindowGroup {
-//            if hasLaunched {
-                RootView()
-            
-//             else{
-//                SplashScreenView {
-//                    hasLaunched = true
-//                }
-//            }
+            RootView()
         }
     }
 }

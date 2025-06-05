@@ -75,11 +75,10 @@ struct SignInView: View {
                         Task {
                             await viewModel.signIn()
                     
-                            print(viewModel.isSignedIn ? "signed in" : "not signed in")
-                            
-//                            if viewModel.isSignedIn {
-//                                navigateToHome = true
-//                            }
+                            print(
+                                viewModel.isSignedIn ? "signed in" : "not signed in"
+                            )
+            
                         }
                     },
                     isDisabled: !isValidInput,
@@ -88,9 +87,7 @@ struct SignInView: View {
                 .padding(.top)
             }
             .padding()
-//            .navigationDestination(isPresented: $navigateToHome) {
-//                MainTabView()
-            //  }
+
         }
     }
 

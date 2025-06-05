@@ -9,15 +9,22 @@ import SwiftUI
 
 struct RootView: View {
     @StateObject private var authViewModel = AuthViewModel()
+    @State private var showSplash = true
 
     var body: some View {
         Group {
-            if authViewModel.isSignedIn {
-                MainTabView()
-            } else {
-                SignInView()
-            }
-        }
+                    if showSplash {
+                        SplashScreenView {
+                            showSplash = false
+                        }
+                    } else {
+                        if authViewModel.isSignedIn {
+                            MainTabView()
+                        } else {
+                            SignInView()
+                        }
+                    }
+                }
         .environmentObject(authViewModel)
     }
 }
