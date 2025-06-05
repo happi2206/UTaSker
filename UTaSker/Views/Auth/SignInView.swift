@@ -85,6 +85,18 @@ struct SignInView: View {
                     isLoading: viewModel.isLoading ? true: false,
                 )
                 .padding(.top)
+                
+                HStack {
+                    Text("Don't have an account?")
+                        .font(.footnote)
+                    
+                    NavigationLink(destination: SignupView().environmentObject(AuthViewModel())) {
+                        Text("Sign Up")
+                            .fontWeight(.bold)
+                            .foregroundColor(.blue)
+                            .font(.footnote)
+                    }
+                }.padding(.top)
             }
             .padding()
 

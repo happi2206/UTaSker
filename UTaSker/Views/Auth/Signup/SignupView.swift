@@ -1,97 +1,114 @@
+//
+//  SignupView.swift
+//  UTaSker
+//
+//  Created by Happiness on 5/6/2025.
+//
 import SwiftUI
 
-struct SignUpView: View {
-    @State private var firstName = ""
-    @State private var lastName = ""
-    @State private var phoneNumber = ""
-    @State private var email = ""
-    @State private var password = ""
+struct SignupView: View {
+    @StateObject private var authViewModel = AuthViewModel()
+    @State private var confirmPassword = ""
+    @State private var navigateToCreateProfile = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    
+
                     HStack {
                         Button(action: {
-                           
+                            // Handle back navigation if needed
                         }) {
                             Image(systemName: "chevron.left")
                                 .font(.title2)
                                 .foregroundColor(.black)
                         }
                         Spacer()
-                        Text("Create your profile")
+                        Text("Create your account")
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
                         Spacer()
-                        
                         Image(systemName: "chevron.left")
                             .opacity(0)
                     }
                     .padding(.horizontal)
 
-                    
-                    HStack {
-                                    Spacer()
-                                    ZStack(alignment: .bottomTrailing) {
-                                        Circle()
-                                            .fill(Color(.systemGray5))
-                                            .frame(width: 180, height: 180)
-                                            .overlay(
-                                                Image(systemName: "person.fill")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 80, height: 80)
-                                                    .foregroundColor(.black)
-                                                    .padding(25)
-                                            )
-                                        Circle()
-                                            .fill(Color(.systemGray5))
-                                            .frame(width: 32, height: 32)
-                                            .overlay(
-                                                Image(systemName: "camera.fill")
-                                                    .font(.system(size: 14))
-                                                    .foregroundColor(.black)
-                                            )
-                                            .offset(x: -5, y: -5)
-                                    }
-                                    Spacer()
-                                }
-                    
+                    Image("UTaskerLogo")
+                        .resizable()
+                        .scaledToFit().frame(width: 200, height: 200)
 
-                    // Form Fields
                     Group {
-                        StyledField(title: "First Name", placeholder: "First Name", text: $firstName)
-                        StyledField(title: "Last Name", placeholder: "Last Name", text: $lastName)
-                        StyledField(title: "Phone Number", placeholder: "04XXXXXXXX", text: $phoneNumber, keyboardType: .phonePad)
-                        StyledField(title: "UTS Email Address", placeholder: "Firstname.lastname@student.uts.edu.au", text: $email, keyboardType: .emailAddress)
-                        SecureStyledField(title: "Create a Password", placeholder: "Minimum 8 characters", text: $password)
+                        StyledField(
+                            title: "UTS Email Address",
+                            placeholder: "Firstname.lastname@student.uts.edu.au",
+                            text: $authViewModel.email,
+                            keyboardType: .emailAddress
+                        )
+                        SecureStyledField(
+                            title: "Create a Password",
+                            placeholder: "Minimum 8 characters",
+                            text: $authViewModel.password
+                        )
+                        SecureStyledField(
+                            title: "Confirm your Password",
+                            placeholder: "",
+                            text: $confirmPassword
+                        )
                     }
 
-                    
-                    Button(action: {
-                        
-                    }) {
-                        Text("Sign Up")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
+                    if let error = authViewModel.errorMessage {
+                        Text(error)
+                            .foregroundColor(.red)
+                            .font(.caption)
                     }
 
-                    
+                    PrimaryButton(
+                        title: authViewModel.isLoading ? "Signing Up..." : "Sign Up",
+                        action: {
+                            guard authViewModel.password
+                                .trimmingCharacters(
+                                    in: .whitespacesAndNewlines
+                                ) ==
+                                    confirmPassword
+                                .trimmingCharacters(in: .whitespacesAndNewlines) else {
+                                authViewModel.errorMessage = "Passwords do not match"
+                                return
+                            }
+
+                            Task {
+                                await authViewModel.signUp()
+                                if authViewModel.isSignedIn {
+                                    navigateToCreateProfile = true
+                                }
+                            }
+                        },
+                        isDisabled: !isValidInput || authViewModel.isLoading,
+                        isLoading: authViewModel.isLoading
+                    )
+                    .padding(.top)
+
+
                     HStack {
                         Text("Already have an account?")
                             .font(.footnote)
-                        Button("Sign In") {
-                            
+                        
+                        NavigationLink(destination: SignInView()) {
+                            Text("Sign In")
+                                .fontWeight(.bold)
+                                .foregroundColor(.blue)
+                                .font(.footnote)
                         }
-                        .font(.footnote)
-                        .foregroundColor(.blue)
                     }
+
+                    
+                    .navigationDestination(
+                        isPresented: $authViewModel.needsProfileSetup
+                    ) {
+                        SetupAccountView()
+                    }
+
                 }
                 .padding()
             }
@@ -99,60 +116,17 @@ struct SignUpView: View {
             .navigationBarHidden(true)
         }
     }
-}
 
-struct StyledField: View {
-    var title: String
-    var placeholder: String
-    @Binding var text: String
-    var keyboardType: UIKeyboardType = .default
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            (
-                Text(title)
-                    .foregroundColor(.black) +
-                Text("*")
-                    .foregroundColor(.red)
-            )
-            .font(.system(size: 14))
-            .fontWeight(.semibold)
-
-            TextField(placeholder, text: $text)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
-                .keyboardType(keyboardType)
-        }
+    var isValidInput: Bool {
+        !authViewModel.email.isEmpty &&
+        authViewModel.password.count >= 8 &&
+        confirmPassword == authViewModel.password
     }
-}
 
-struct SecureStyledField: View {
-    var title: String
-    var placeholder: String
-    @Binding var text: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            (
-                Text(title)
-                    .foregroundColor(.black) +
-                Text("*")
-                    .foregroundColor(.red)
-            )
-            .font(.system(size: 14))
-            .fontWeight(.semibold)
-
-            SecureField(placeholder, text: $text)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
-        }
-    }
 }
 
 
 #Preview {
-    SignUpView()
+    SignupView().environmentObject(AuthViewModel())
 }
 
