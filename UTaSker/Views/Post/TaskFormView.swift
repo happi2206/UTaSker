@@ -41,7 +41,7 @@ struct TaskFormView: View {
                 case 0:
                     VStack {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("Start with a title")
+                            Text("Enter Task Title")
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                             
@@ -65,7 +65,7 @@ struct TaskFormView: View {
                                 .fontWeight(.medium)
                             DatePicker(
                                 selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/,
-                                label: { Text("Pick a good time")
+                                label: { Text("Choose a date and time")
                                 })
                             .font(.footnote)
                         }.padding(.vertical)
@@ -99,7 +99,7 @@ struct TaskFormView: View {
 
                 case 1:
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Describe your task")
+                        Text("Description of your task")
                             .font(.subheadline)
                             .fontWeight(.medium)
 
@@ -122,7 +122,7 @@ struct TaskFormView: View {
                      
                 case 3:
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("How would you pay?")
+                        Text("How would you like to pay?")
                             .font(.subheadline)
                             .fontWeight(.medium)
                         
