@@ -12,9 +12,12 @@ private enum Field {
 }
 
 struct SignInView: View {
-    @StateObject private var viewModel = AuthViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
     @FocusState private var focusField: Field?
-
+    @State private var navigateToHome = false
+    
+ 
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -71,7 +74,11 @@ struct SignInView: View {
                     action: {
                         Task {
                             await viewModel.signIn()
-                            print("signed in")
+                    
+                            print(
+                                viewModel.isSignedIn ? "signed in" : "not signed in"
+                            )
+            
                         }
                     },
                     isDisabled: !isValidInput,
@@ -80,6 +87,7 @@ struct SignInView: View {
                 .padding(.top)
             }
             .padding()
+
         }
     }
 
@@ -94,4 +102,5 @@ struct SignInView: View {
 
 #Preview {
     SignInView()
+        .environmentObject(AuthViewModel())
 }

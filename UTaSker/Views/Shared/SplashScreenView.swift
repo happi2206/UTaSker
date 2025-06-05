@@ -34,10 +34,6 @@ struct SplashScreenView: View {
           
                 
                 VStack {
-                    //                    Image("Logo")
-                    //                        .resizable()
-                    //                        .scaledToFit()
-                    //                        .frame(width: 200, height: 200)
                     
                     HStack(spacing: 0) {
                         Text("UT")
