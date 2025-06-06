@@ -13,15 +13,22 @@ struct TaskCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "dd MMM yyyy, h:mm a"
             HStack {
-                Text("\(task.date) · \(task.time)")
+                Text(task.date.formatted())
                     .font(.subheadline)
                     .foregroundColor(.textColor1)
                     .fontWeight(.medium)
 
                 Spacer()
-
-                Text(task.price)
+//                var price : String
+//                if case .payment(let amount) = task.price {
+//                    price = ("$\(amount)")
+//                } else if case .reward(let rewardText) = task.price {
+//                    price = rewardText
+//                }
+                Text(task.price.associatedValue())
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(.textColor1)
@@ -43,7 +50,7 @@ struct TaskCardView: View {
                         .foregroundColor(.textColor1)
                         .fontWeight(.medium)
 
-                    Text("\(task.building) · \(task.distance)")
+                    Text(task.location)
                         .font(.footnote)
                         .foregroundColor(.textColor2)
                 }
@@ -65,16 +72,20 @@ struct TaskCardView: View {
 
 #Preview {
     TaskCardView(task: TaskModel(
-        date: "Thu 29 May",
-        time: "10 AM",
-        title: "Laptop Setup",
-        building: "Building 11",
-        distance: "150m",
-        description: "Organize books back unto the shelves in alphabetical order",
-        iconName: "laptopcomputer",
-        price: "$30",
-        status: "Completed",
-        isMyTask: false,
-      isCurrentTask: false
+        id: UUID(),
+        posterID: UUID(),
+        taskerID: nil,
+        date: DateComponents(calendar: .current, year: 2025, month: 6, day: 1, hour: 10).date!,
+        duration: "1 hour",
+        title: "Tech booth setup",
+        description: "Help with setting up tech booth cables and monitors.",
+        location: "Building 6",
+        iconName: "desktopcomputer",
+        price: .payment(20),
+        category: .labour,
+        requirements: [.field("Familiar with cable setup")],
+        images: ["Home1"],
+        taskStatus: .pending,
+        isMyTask: true
     ))
 }

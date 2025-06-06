@@ -9,9 +9,10 @@ import SwiftUI
 
 struct MyTaskView: View {
     @State private var selectedTab = 0
-    @State private var selectedFilter = "All"
-    
-    let filters = ["All", "Open", "Pending", "Ongoing", "Awaiting Review", "Completed", "Cancelled"]
+    @State private var selectedFilter: TaskOpenStatus? = nil // nil = All
+
+    // Create human-readable labels
+    let filters: [TaskOpenStatus?] = [nil] + TaskOpenStatus.allCases
     
     var body: some View {
         NavigationStack {
@@ -46,7 +47,7 @@ struct MyTaskView: View {
                                 Button(action: {
                                     selectedFilter = filter
                                 }) {
-                                    Text(filter)
+                                    Text(filter == nil ? "All" : formatStatus(filter!))
                                         .font(.subheadline)
                                         .padding(.horizontal, 16)
                                         .padding(.vertical, 8)
@@ -77,21 +78,23 @@ struct MyTaskView: View {
     }
     
     var filteredTasks: [TaskModel] {
-        // First filter by Posted/Applied (isMyTask)
         let baseTasks = selectedTab == 0
-            ? SampleTasks.all.filter { $0.isMyTask } // Posted tasks (isMyTask = true)
-            : SampleTasks.all.filter { !$0.isMyTask } // Applied tasks (isMyTask = false)
-        
-        // Then filter by status
-        if selectedFilter == "All" {
-            return baseTasks
+            ? SampleTasks.all.filter { $0.isMyTask }
+            : SampleTasks.all.filter { !$0.isMyTask }
+
+        if let selectedStatus = selectedFilter {
+            return baseTasks.filter { $0.taskStatus == selectedStatus }
         } else {
-            return baseTasks.filter { $0.status.lowercased() == selectedFilter.lowercased() }
+            return baseTasks // Show all
         }
     }
 
+    // Utility to format enum case to "Open", "Awaiting Review", etc.
+    func formatStatus(_ status: TaskOpenStatus) -> String {
+        let raw = status.rawValue
+        return raw.replacingOccurrences(of: "([a-z])([A-Z])", with: "$1 $2", options: .regularExpression).capitalized
+    }
 }
-
 #Preview {
     MyTaskView()
 }

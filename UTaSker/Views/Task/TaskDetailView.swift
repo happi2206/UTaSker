@@ -18,12 +18,12 @@ struct TaskDetailView: View {
                 HStack {
                     
                     
-//                    Text("")
-//                        .font(.title3)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.textColor1)
-//                        .offset(x: -10)
-//                    Spacer()
+                    //                    Text("")
+                    //                        .font(.title3)
+                    //                        .fontWeight(.bold)
+                    //                        .foregroundColor(.textColor1)
+                    //                        .offset(x: -10)
+                    //                    Spacer()
                
                 }
                 .padding(.horizontal, 8)
@@ -51,7 +51,8 @@ struct TaskDetailView: View {
                                     .foregroundColor(.textColor1)
                                     .fontWeight(.medium)
                                 Text(
-                                    task.description.components(separatedBy: ".")[0] + "."
+                                    task.description
+                                        .components(separatedBy: ".")[0] + "."
                                 ) //task.description.components(separatedBy: ".")[0] + "."
                                 .font(.footnote)
                                 .foregroundColor(.textColor2)
@@ -125,9 +126,13 @@ struct TaskDetailView: View {
                             .padding(.bottom, 15)
                         
                         HStack {
+//                            let formatter = DateFormatter()
+//                            formatter.dateFormat = "dd MMM yyyy, h:mm a"
                             Image(systemName: "calendar")
-                            Text("\(task.date) · \(task.time)")
-                                .fontWeight(.medium)
+                            Text(
+                                task.date.formatted()
+                            )
+                            .fontWeight(.medium)
                         }
                         
                         Divider()
@@ -135,7 +140,14 @@ struct TaskDetailView: View {
                         
                         HStack {
                             Image(systemName: "creditcard")
-                            Text(task.price) //
+//                            let price: String
+//                            switch task.price {
+//                            case .payment(let amount):
+//                                price = "$\(amount)"
+//                            case .reward(let rewardText):
+//                                price = rewardText
+//                            }
+                            Text(task.price.associatedValue())
                         }
                         
                         Divider()
@@ -145,7 +157,7 @@ struct TaskDetailView: View {
                             Text("Location")
                                 .font(.footnote)
                                 .foregroundColor(.textColor2)
-                            Text(task.building)
+                            Text(task.location)
                         }
                         
                         HStack {
@@ -174,7 +186,7 @@ struct TaskDetailView: View {
                     
                 }
                 if task.isMyTask {
-                    if task.status == "Open" {
+                    if task.taskStatus == .open {
                         PrimaryButton(
                             title: "View Offers",
                             action: { isOffersSheetShowing = true },
@@ -182,15 +194,22 @@ struct TaskDetailView: View {
                             textColor: .white
                         )
                     } else {
+                        let formattedStatus = task.taskStatus.rawValue
+                            .replacingOccurrences(
+                                of: "([a-z])([A-Z])",
+                                with: "$1 $2",
+                                options: .regularExpression
+                            )
+                            .capitalized
                         PrimaryButton(
-                            title: task.status,
+                            title: formattedStatus,
                             action: { print("hey") },
                             backgroundColor: .primaryDark,
                             textColor: .white
                         )
                     }
                 } else
-                if task.status == "Open" {
+                if task.taskStatus == .open {
                     NavigationLink(
                         destination: ConfirmationScreenView(
                             title: "You've made a request!",
@@ -219,14 +238,14 @@ struct TaskDetailView: View {
             .padding()
             
         }.navigationTitle("Task Details")
-        .sheet(isPresented: $isOffersSheetShowing){
-            OffersView()
-        }
-        .sheet(isPresented: $showStatusSheet) {
-            TaskStatusSheetView()
-                .presentationDetents([.fraction(CGFloat(0.45))])
-                .presentationDragIndicator(.visible)
-        }
+            .sheet(isPresented: $isOffersSheetShowing){
+                OffersView()
+            }
+            .sheet(isPresented: $showStatusSheet) {
+                TaskStatusSheetView()
+                    .presentationDetents([.fraction(CGFloat(0.45))])
+                    .presentationDragIndicator(.visible)
+            }
     }
     
     
@@ -241,19 +260,30 @@ struct TaskDetailView: View {
     
 }
 
-
-
 #Preview {
-    TaskDetailView(task: TaskModel(
-        date: "Thu 29 May",
-        time: "10 AM",
-        title: "Laptop Setup",
-        building: "Building 11",
-        distance: "150m",
-        description: "Need help setting up a new laptop. I recently bought a Mac and its my first time using one. Can someone with Mac experience teach me how to get it set up? I've gotta test how long this can get so I'm just gonna keep writing and writing and blah blah blah wahooooooooooooooooooooooooooooo",
-        iconName: "laptopcomputer",
-        price: "$30",
-        status: "Open",
-        isMyTask: true,
-        isCurrentTask: false))
+    TaskDetailView(
+task: TaskModel(
+        id: UUID(),
+        posterID: UUID(),
+        taskerID: nil,
+        date: DateComponents(
+            calendar: .current,
+            year: 2025,
+            month: 6,
+            day: 1,
+            hour: 10
+        ).date!,
+        duration: "1 hour",
+        title: "Tech booth setup",
+        description: "Help with setting up tech booth cables and monitors.",
+        location: "Building 6",
+        iconName: "desktopcomputer",
+        price: .payment(20),
+        category: .labour,
+        requirements: [.field("Familiar with cable setup")],
+        images: ["Home1"],
+        taskStatus: .pending,
+        isMyTask: true
+)
+    )
 }
