@@ -1,21 +1,19 @@
 import SwiftUI
 
 struct TaskStatusText {
-    static func getColor(for status: String) -> Color {
-        switch status.lowercased() {
-        case "open":
+    static func getColor(for status: TaskOpenStatus) -> Color {
+        switch status {
+        case .open:
             return Color.primaryGreen
-        case "pending":
+        case .pending:
             return Color.orange
-        case "ongoing":
+        case .ongoing:
             return Color.primaryBlue
-        case "awaiting review":
+        case .awaitingReview:
             return Color.red
-        case "completed":
+        case .completed:
             return Color.gray
-        case "cancelled":
-            return Color.gray
-        default:
+        case .cancelled:
             return Color.gray
         }
     }
@@ -23,11 +21,12 @@ struct TaskStatusText {
 
 struct StatusText: View {
     var isMyTask: Bool
-    var status: String
+    var status: TaskOpenStatus
     var numberOfOffers: Int?
         var body: some View {
+            let formattedStatus = status.rawValue.replacingOccurrences(of: "([a-z])([A-Z])", with: "$1 $2", options: .regularExpression).capitalized
             HStack{
-                Text(status)
+                Text(formattedStatus)
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(TaskStatusText.getColor(for: status))
@@ -43,5 +42,5 @@ struct StatusText: View {
 }
 
 #Preview {
-    StatusText(isMyTask: true, status: "Awaiting Review", numberOfOffers: 3)
+    StatusText(isMyTask: true, status: .awaitingReview, numberOfOffers: 3)
 }
