@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SearchView: View {
+    @StateObject var viewModel: TaskViewModel = TaskViewModel()
+   
     var body: some View {
         NavigationStack {
             ZStack {
@@ -15,7 +17,6 @@ struct SearchView: View {
                 
                 VStack(alignment: .leading, spacing: 16) {
                     FiltersView()
-                    
                     ScrollView {
                         VStack(spacing: 16) {
                             ForEach(SampleTasks.all) { task in
