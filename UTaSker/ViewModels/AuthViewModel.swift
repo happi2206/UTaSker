@@ -7,6 +7,9 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
+import UIKit
 
 @MainActor
 class AuthViewModel: ObservableObject {
@@ -63,5 +66,54 @@ class AuthViewModel: ObservableObject {
         }
 
         isLoading = false
+    }
+}
+
+
+
+extension AuthViewModel {
+    func saveProfile(firstName: String, lastName: String, phoneNumber: String, selectedImage: UIImage?, bio: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            completion(.failure(NSError(domain: "No user", code: 401)))
+            return
+        }
+
+        func saveToFirestore(imageUrl: String?) {
+            let db = Firestore.firestore()
+            db.collection("users").document(user.uid).setData([
+                "uid": user.uid,
+                "firstName": firstName,
+                "lastName": lastName,
+                "phoneNumber": phoneNumber,
+                "email": user.email ?? "",
+                "imageUrl": imageUrl ?? "",
+                "bio": bio
+            ]) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    self.needsProfileSetup = false
+                    self.isSignedIn = true
+                    completion(.success(()))
+                }
+            }
+        }
+
+        // Upload image if it exists
+        if let image = selectedImage,
+           let data = image.jpegData(compressionQuality: 0.8) {
+            let ref = Storage.storage().reference().child("profile_images/\(user.uid).jpg")
+            ref.putData(data, metadata: nil) { _, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    ref.downloadURL { url, err in
+                        saveToFirestore(imageUrl: url?.absoluteString)
+                    }
+                }
+            }
+        } else {
+            saveToFirestore(imageUrl: nil)
+        }
     }
 }

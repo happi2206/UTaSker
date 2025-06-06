@@ -80,7 +80,7 @@ struct NewTaskModel: Identifiable {
     @State private(set) var title: String
     @State private(set) var description: String
     @State private(set) var location: String                // might set up another custom structure for location. e.g they select building or exterior location. they select building floor and room, if any.
-    @State private(set) var distance: Int
+    @State private(set) var distance: Int  // not sure we need this. might just make things more complicated for now - happi
     @State private(set) var iconName: String
     @State private(set) var price: Price
     @State private(set) var category: TaskCategory

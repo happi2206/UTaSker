@@ -1,5 +1,7 @@
 import SwiftUI
 import FirebaseAuth
+import FirebaseStorage
+
 
 struct SetupAccountView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -8,7 +10,13 @@ struct SetupAccountView: View {
     @State private var lastName = ""
     @State private var phoneNumber = ""
     @State private var isLoading = false
+    @State private var imgName = ""
+    @State private var bio = ""
+    
+    @State private var selectedImage: UIImage?
+    @State private var showImagePicker = false
 
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -20,13 +28,26 @@ struct SetupAccountView: View {
                                 .fill(Color(.systemGray5))
                                 .frame(width: 180, height: 180)
                                 .overlay(
-                                    Image(systemName: "person.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 80, height: 80)
-                                        .foregroundColor(.black)
-                                        .padding(25)
+                                    Group {
+                                        if let selectedImage = selectedImage {
+                                            Image(uiImage: selectedImage)
+                                                .resizable()
+                                                .scaledToFill()
+                                        } else {
+                                            Image(systemName: "person.fill")
+                                                .resizable()
+                                                .frame(width: 100, height: 100)
+                                                .scaledToFit()
+                                                .foregroundColor(.black)
+                                                .padding(25)
+                                        }
+                                    }
+                                        .clipShape(Circle())
                                 )
+                                .onTapGesture {
+                                    showImagePicker = true
+                                }
+
                             Circle()
                                 .fill(Color(.systemGray5))
                                 .frame(width: 32, height: 32)
@@ -36,10 +57,10 @@ struct SetupAccountView: View {
                                         .foregroundColor(.black)
                                 )
                                 .offset(x: -5, y: -5)
+                                .padding()
                         }
                         Spacer()
                     }
-                    
 
                     // Form Fields
                     Group {
@@ -59,6 +80,11 @@ struct SetupAccountView: View {
                             text: $phoneNumber,
                             keyboardType: .phonePad
                         )
+                        StyledField(
+                            title: "Bio",
+                            placeholder: "Enter details about yourself",
+                            text: $bio
+                        )
                  
                     }
 
@@ -66,40 +92,24 @@ struct SetupAccountView: View {
                     PrimaryButton(
                         title: isLoading ? "Saving..." : "Save",
                         action: {
-                            guard let user = Auth.auth().currentUser else {
-                                return
-                            }
                             isLoading = true
-
-
-                            let profile = UserProfile(
-                                uid: user.uid,
+                            authViewModel.saveProfile(
                                 firstName: firstName,
                                 lastName: lastName,
                                 phoneNumber: phoneNumber,
-                                email: user.email ?? "",
-                             
-                                
-                            )
-
-                            FirestoreService.shared
-                                .saveUserProfile(profile) { result in
-                                    isLoading = false
-                                    switch result {
-                                    case .success:
-                                        print("User profile saved.")
-                                        authViewModel.needsProfileSetup = false
-                                        authViewModel.isSignedIn = true
-                                     
-                                    case .failure(let error):
-                                        print(
-                                            "Error saving profile: \(error.localizedDescription)"
-                                        )
-                                    }
+                                selectedImage: selectedImage,
+                                bio: bio
+                            ) { result in
+                                isLoading = false
+                                if case .failure(let error) = result {
+                                    print("Error: \(error.localizedDescription)")
                                 }
+                            }
                         },
-                        isDisabled: firstName.isEmpty || lastName.isEmpty || phoneNumber.isEmpty
+                        isDisabled: firstName.isEmpty || lastName.isEmpty || phoneNumber.isEmpty,
+                        isLoading: isLoading
                     )
+
                     .padding(.top)
 
 
@@ -120,8 +130,14 @@ struct SetupAccountView: View {
            
        
         } .navigationTitle("Create your profile")
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $selectedImage)
+            }
+
     }
 }
+
+
 
 
 #Preview {
