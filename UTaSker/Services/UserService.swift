@@ -41,7 +41,9 @@ class UserService {
                     firstName: first,
                     lastName: data["lastName"] as? String ?? "",
                     phoneNumber: data["phoneNumber"] as? String ?? "",
-                    email: data["email"] as? String ?? ""
+                    email: data["email"] as? String ?? "",
+                    imageUrl: data["imageUrl"] as? String ?? "",
+                    bio: data["bio"] as? String ?? ""
                 )
                 completion(profile)
             } else {
