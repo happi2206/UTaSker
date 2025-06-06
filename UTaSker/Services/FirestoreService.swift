@@ -16,6 +16,8 @@ struct UserProfile: Codable {
     let lastName: String
     let phoneNumber: String
     let email: String
+    let imageUrl: String?
+    let bio: String
 }
 
 class FirestoreService {
@@ -27,7 +29,8 @@ class FirestoreService {
             "firstName": profile.firstName,
             "lastName": profile.lastName,
             "phoneNumber": profile.phoneNumber,
-            "email": profile.email
+            "email": profile.email,
+            "imageUrl": profile.imageUrl ?? ""
         ]) { error in
             if let error = error {
                 completion(.failure(error))

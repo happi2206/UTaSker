@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomTabView: View {
     @State private var selectedTab = 1
+    let bio: String
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,7 +20,7 @@ struct CustomTabView: View {
             .pickerStyle(.segmented)
             
             if (selectedTab == 1) {
-                Text("This is my bio! I can write stuff about myself or what I'm good at 😎. I can't think of any 🤔 so I'm just going to keep talking until I run out of things to say 😁.")
+                Text(bio)
             }
             else if (selectedTab == 2) {
                 
@@ -38,8 +39,9 @@ struct CustomTabView: View {
             }
         }
         .padding(.horizontal)
+        
     }
 }
 #Preview {
-    CustomTabView()
+    CustomTabView(bio: "TEST")
 }

@@ -68,7 +68,7 @@ struct OffersProfileView: View {
                     
                     ScrollView{
                         VStack (alignment: .leading) {
-                            CustomTabView()
+                            CustomTabView(bio: "heyyeyeye")
                         }
                     }.frame(height: 270)
                     

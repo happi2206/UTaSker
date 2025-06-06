@@ -9,6 +9,11 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    @State private var userName: String = ""
+    @State private var userEmail: String = ""
+    @State private var userImage: String = ""
+    @State private var bio: String = ""
  
     var body: some View {
         ScrollView {
@@ -16,7 +21,6 @@ struct ProfileView: View {
                 
            
                 HStack {
-//                    Image(systemName: "chevron.left")
                     Spacer()
                     Text("Profile")
                         .font(.headline)
@@ -26,18 +30,23 @@ struct ProfileView: View {
                 .padding(.horizontal)
 
                 VStack(spacing: 3) {
-                    Image("FemalePlaceholder")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120, height: 120)
-                        .clipShape(Circle())
+                    AsyncImage(url: URL(string: userImage)) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+
                     
-                    Text("Sophia Carter")
+                    Text(userName)
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.textColor1)
                     
-                    Text("Student")
+                    Text(userEmail)
                         .foregroundColor(.textColor2)
                 }.padding(.top, 10)
         
@@ -61,10 +70,24 @@ struct ProfileView: View {
                 )
                 .padding(.horizontal)
                 .padding(.top)
-                CustomTabView()
+                CustomTabView(bio: bio)
                 
             }
             .padding(.top)
+        }
+        
+        .onAppear {
+            UserService.shared.fetchUserProfile { profile in
+                if let profile = profile {
+                    self.userName = profile.firstName
+                    self.userEmail = profile.email
+                    self.userImage = profile.imageUrl ?? ""
+                    self.bio = profile.bio
+                    
+                } else {
+                    self.userName = "User"
+                }
+            }
         }
     }
 }
